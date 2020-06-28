@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\Projects\Me\Dr Wessam\Dr Wessam\Wessam</_PublishTargetUrl>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAkcmDCUM3wku+DAOEz0RsKgAAAAACAAAAAAAQZgAAAAEAACAAAACtidUQ8spEHcpBAzqk/rQ0/FklLgmbT8v6bTu5UNfcdwAAAAAOgAAAAAIAACAAAAC+96vFJcMR/YLiiJdDHHCzeUdMUL1VNw/msUmtPIESJiAAAADAitxwnySpE1G+/+nlm3N5Zc2kZMxOAAH/JP+AYHFhy0AAAABqu5BrRonRJC8rwX1o9CzxZkFyqWrB1FpaFmGszY3gvuFQIHaC59O7kbZ3rBJZMyLc8aMPvUMZ/31BMjWe1GYq</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=SQL5050.site4now.net%3bInitial Catalog=DB_A50E0C_DrWessamDB1%3bUser Id=DB_A50E0C_DrWessamDB1_admin%3bPassword=md1411993%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
