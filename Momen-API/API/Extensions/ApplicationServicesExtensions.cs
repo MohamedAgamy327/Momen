@@ -2,6 +2,8 @@
 using API.IHelpers;
 using Microsoft.Extensions.DependencyInjection;
 using Core.UnitOfWork;
+using Core.IRepository;
+using Core.Repository;
 
 namespace API.Extensions
 {
@@ -11,6 +13,7 @@ namespace API.Extensions
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IJWTManager, JWTManager>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             return services;
         }
     }

@@ -7,11 +7,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <_PublishTargetUrl>D:\Projects\Me\Dr Wessam\Dr Wessam\Wessam</_PublishTargetUrl>
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAkcmDCUM3wku+DAOEz0RsKgAAAAACAAAAAAAQZgAAAAEAACAAAACtidUQ8spEHcpBAzqk/rQ0/FklLgmbT8v6bTu5UNfcdwAAAAAOgAAAAAIAACAAAAC+96vFJcMR/YLiiJdDHHCzeUdMUL1VNw/msUmtPIESJiAAAADAitxwnySpE1G+/+nlm3N5Zc2kZMxOAAH/JP+AYHFhy0AAAABqu5BrRonRJC8rwX1o9CzxZkFyqWrB1FpaFmGszY3gvuFQIHaC59O7kbZ3rBJZMyLc8aMPvUMZ/31BMjWe1GYq</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAs8Sz9DU+EkeQKjgQ4b39EwAAAAACAAAAAAAQZgAAAAEAACAAAADuDKRypXHh3IXKHjvaCpbIghlgfM1RVjzv7AEFbWXMqAAAAAAOgAAAAAIAACAAAACauD4S442zWu0CuMgH6m62MT2TwxKlWWuF3C4C553zwyAAAAAVEMlere6YdLH6tDP1CSbFGHwzPke4rx9+hklEaeXNvUAAAABzOGcSnTwuaL2xxf98aKl8eVaqQdzqIFG5GmhncbWJ0AsZzYxjy2GUDVY2hCn8T1CH/H+6JNAR1DKuYPJvP01d</EncryptedPassword>
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="DefaultConnection">
-      <Value>Data Source=SQL5050.site4now.net%3bInitial Catalog=DB_A50E0C_DrWessamDB1%3bUser Id=DB_A50E0C_DrWessamDB1_admin%3bPassword=md1411993%3b</Value>
+      <Value>Data Source=SQL5063.site4now.net%3bInitial Catalog=DB_A50E0C_MomenBookingDB%3bUser Id=DB_A50E0C_MomenBookingDB_admin%3bPassword=momen2020</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
 </Project>

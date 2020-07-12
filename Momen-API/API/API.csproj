@@ -39,9 +39,6 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
-    <Folder Include="MappingProfile\" />
-    <Folder Include="Validator\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

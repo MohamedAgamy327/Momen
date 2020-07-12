@@ -1,4 +1,5 @@
 ﻿using Data.SeedData;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -18,6 +19,8 @@ namespace Data.Context
             modelBuilder.Seed();
         }
 
-      
+        public DbSet<Category> Categories { get; set; }
+
+
     }
 }
