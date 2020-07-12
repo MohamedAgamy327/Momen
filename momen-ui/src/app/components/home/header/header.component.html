@@ -1,0 +1,37 @@
+<mat-toolbar id="appToolbar" class="gene-header-toolbar">
+    <div class="gene-ham-icon" tourAnchor="start.tour">
+        <button mat-mini-fab color="primary" mat-card-icon (click)="toggleSidebar()">
+				<mat-icon>menu</mat-icon>
+			</button>
+    </div>
+    <a class="navbar-brand">{{header}}</a>
+    <breadcrumb class="gene-breadcrumbs"></breadcrumb>
+    <span fxFlex></span>
+    <div class="secondary-menu">
+        <button fxHide="true" fxHide.gt-sm="false" mat-button class="fullscreen-toggle" (click)="toggleFullscreen()" tourAnchor="tour-full-screen">
+				<mat-icon *ngIf="!isFullscreen">fullscreen</mat-icon>
+				<mat-icon *ngIf="isFullscreen">fullscreen_exit</mat-icon>
+      </button>
+    </div>
+
+    <button class="user-button" mat-button [matMenuTriggerFor]="menu">
+				<div fxLayout="row" fxLayoutAlign="center center">
+					<mat-icon>account_circle</mat-icon>
+				</div>
+			</button>
+
+    <app-language-drop-down></app-language-drop-down>
+
+</mat-toolbar>
+
+<mat-menu class="user-menu" x-position="before" y-position="below" #menu="matMenu">
+    <button mat-menu-item>
+		<mat-icon>account_circle</mat-icon>
+		<!-- <span>Hi {{credentialService.getUser().name | titlecase }}</span> -->
+	</button>
+    <mat-divider></mat-divider>
+    <button (click)="logout()" mat-menu-item>
+		<mat-icon>exit_to_app</mat-icon>
+		<span>{{'Logout'|translate}}</span>
+	</button>
+</mat-menu>
