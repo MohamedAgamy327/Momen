@@ -75,7 +75,6 @@ namespace API.Controllers
 
         [HttpGet("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         public async Task<ActionResult<CategoryForGetDTO>> Get(int id)
         {
             if (!await _categoryRepository.IsExist(id).ConfigureAwait(true))
@@ -88,7 +87,6 @@ namespace API.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
         public async Task<ActionResult<IReadOnlyList<CategoryForGetDTO>>> Get()
         {
             List<CategoryForGetDTO> categorys = _mapper.Map<List<CategoryForGetDTO>>(await _categoryRepository.GetAsync().ConfigureAwait(true));

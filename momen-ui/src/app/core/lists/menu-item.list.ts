@@ -42,5 +42,11 @@ export const MenuItemList: MenuItem[] = [
     name: 'User List',
     type: 'link',
     icon: 'supervisor_account'
+  },
+  {
+    state: 'home/categories',
+    name: 'Category List',
+    type: 'link',
+    icon: 'supervisor_account'
   }
 ];

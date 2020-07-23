@@ -2,14 +2,14 @@ import { AuthGuard } from '../../core/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {
-  HomeComponent
+  HomeComponent, CategoriesComponent
 } from '.';
-import { RoleEnum } from 'src/app/core/enums';
-
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent
+    path: '', component: HomeComponent, children: [
+      { path: 'categories', component: CategoriesComponent }
+    ]
   },
   {
     path: '', redirectTo: '', pathMatch: 'full'
