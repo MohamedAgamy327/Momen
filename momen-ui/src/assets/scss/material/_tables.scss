@@ -1,0 +1,26 @@
+.mat-header-cell {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    font-weight: 1000;
+}
+
+.table-icon {
+    font-size: 183% !important;
+}
+
+.actions-padding {
+    padding-left: 26px;
+}
+
+.search-input {
+    font-weight: 500;
+    color: blue;
+    border-radius: 25px;
+    height: 45px;
+    padding: 8px 8px 8px 50px;
+    width: 250px;
+    background: #ffffff;
+    transition: background .2s, width .2s;
+    border-color: #3F51B5;
+    border-width: thin;
+}

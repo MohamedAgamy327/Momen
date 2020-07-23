@@ -14,6 +14,7 @@ using System.IO;
 using API.Extensions;
 using System;
 using API.Middleware;
+using Microsoft.Extensions.FileProviders;
 
 namespace API
 {
@@ -92,6 +93,13 @@ namespace API
 
 
             app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+ Path.Combine(Directory.GetCurrentDirectory(), "Content")
+),
+                RequestPath = "/content"
+            });
             app.UseDefaultFiles();
             app.UseRouting();
             app.UseAuthentication();
