@@ -2,7 +2,6 @@ using AutoMapper;
 using Data.Context;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -96,8 +95,8 @@ namespace API
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
- Path.Combine(Directory.GetCurrentDirectory(), "Content")
-),
+                Path.Combine(Directory.GetCurrentDirectory(), "Content")
+                ),
                 RequestPath = "/content"
             });
             app.UseDefaultFiles();

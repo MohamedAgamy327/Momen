@@ -1,11 +1,11 @@
-﻿using API.DTO.Category;
+﻿using API.DTO.Contract;
 using FluentValidation;
 
-namespace API.Validator.Category
+namespace API.Validator.Contract
 {
-    public class CategoryForEditDTOValidator : AbstractValidator<CategoryForEditDTO>
+    public class ContractForEditDTOValidator : AbstractValidator<ContractForEditDTO>
     {
-        public CategoryForEditDTOValidator()
+        public ContractForEditDTOValidator()
         {
             RuleFor(x => x.Id)
                    .NotNull()
