@@ -5,6 +5,7 @@ import { ContractAddDialogComponent } from '../contract-add-dialog/contract-add-
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-contracts',
@@ -14,6 +15,8 @@ import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.compone
 })
 
 export class ContractsComponent implements OnInit {
+
+  environment = environment;
 
   filter: string;
   @ViewChild(MatSort, { static: true }) sort: MatSort;

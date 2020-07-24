@@ -12,3 +12,4 @@ export * from './category/category-edit-dialog/category-edit-dialog.component';
 export * from './contract/contracts/contracts.component';
 export * from './contract/contract-add-dialog/contract-add-dialog.component';
 export * from './contract/contract-edit-dialog/contract-edit-dialog.component';
+
