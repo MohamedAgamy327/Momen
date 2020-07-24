@@ -7,7 +7,10 @@ import {
   SideBarComponent,
   CategoriesComponent,
   CategoryAddDialogComponent,
-  CategoryEditDialogComponent
+  CategoryEditDialogComponent,
+  ContractAddDialogComponent,
+  ContractsComponent,
+  ContractEditDialogComponent
 } from '.';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -30,12 +33,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SideBarComponent,
     CategoriesComponent,
     CategoryAddDialogComponent,
-    CategoryEditDialogComponent
+    CategoryEditDialogComponent,
+    ContractAddDialogComponent,
+    ContractsComponent,
+    ContractEditDialogComponent
   ],
   entryComponents: [
     DeleteDialogComponent,
     CategoryAddDialogComponent,
-    CategoryEditDialogComponent
+    CategoryEditDialogComponent,
+    ContractAddDialogComponent,
+    ContractEditDialogComponent
   ],
   imports: [
     CommonModule,

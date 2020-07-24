@@ -27,6 +27,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MomentUtcDateAdapter } from 'src/app/core/helpers';
 import { TourMatMenuModule } from 'ngx-tour-md-menu';
 import { MatGridListResponsive } from '../core/directives';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 @NgModule({
   declarations: [MatGridListResponsive],
@@ -70,7 +71,8 @@ import { MatGridListResponsive } from '../core/directives';
     MatBadgeModule,
     NgxMaterialTimepickerModule,
     NgxMatSelectSearchModule,
-    TourMatMenuModule.forRoot()
+    TourMatMenuModule.forRoot(),
+    MaterialFileInputModule
   ],
   exports: [
     MatInputModule, MatButtonModule, MatSidenavModule,
@@ -86,7 +88,8 @@ import { MatGridListResponsive } from '../core/directives';
     MatTabsModule, MatTooltipModule, MatFormFieldModule,
     MatAutocompleteModule, MatTreeModule,
     MatBadgeModule, CdkTreeModule, NgxMaterialTimepickerModule,
-    NgxMatSelectSearchModule, MatGridListResponsive, TourMatMenuModule
+    NgxMatSelectSearchModule, MatGridListResponsive, TourMatMenuModule,
+    MaterialFileInputModule
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { floatLabel: 'always' } },

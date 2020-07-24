@@ -33,6 +33,7 @@
         "ng5-breadcrumb": "0.0.6",
         "ngx-mat-select-search": "^2.2.0",
         "ngx-material-timepicker": "^5.5.3",
+        "ngx-material-file-input": "^2.1.1",
         "ngx-print": "^1.2.0-beta.5",
         "ngx-slick-carousel": "^0.5.1",
         "ngx-spinner": "^9.0.2",

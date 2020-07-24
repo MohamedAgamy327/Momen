@@ -12,4 +12,9 @@ export class FileValidationService {
     return invalidTypes;
   }
 
+  checkInvalidPDF(file) {
+    const invalidTypes = !file.type.includes('application/pdf');
+    return invalidTypes;
+  }
+
 }

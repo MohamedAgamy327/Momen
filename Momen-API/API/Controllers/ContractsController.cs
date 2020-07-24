@@ -40,7 +40,7 @@ namespace API.Controllers
             return Ok(contractDto);
         }
 
-        [HttpPatch("{{id}}/file")]
+        [HttpPatch("{id:int}/file")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> UploadFile([FromForm] ContractForFileDTO model)
         {
@@ -89,7 +89,7 @@ namespace API.Controllers
             Contract contract = await _contractRepository.GetAsync(id).ConfigureAwait(true);
             _contractRepository.Remove(contract);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
-            System.IO.File.Delete($"{Directory.GetCurrentDirectory()}/Content/{contract.Id}/{contract.Name}");
+            System.IO.File.Delete($"{Directory.GetCurrentDirectory()}/Content/{contract.Id}/{contract.FileName}");
             ContractForGetDTO knwoningDto = _mapper.Map<ContractForGetDTO>(contract);
             return Ok(knwoningDto);
         }
