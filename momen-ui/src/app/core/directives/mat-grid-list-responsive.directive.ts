@@ -12,7 +12,8 @@ import {
 import { Observable, BehaviorSubject, Subscription, merge, of } from 'rxjs';
 import { filter, switchMap, map } from 'rxjs/operators';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { MatGridList } from '@angular/material';
+import { MatGridList } from '@angular/material/grid-list';
+
 
 function calCols(matchedBreakpoint: MatchedBreakpoint): number {
   switch (matchedBreakpoint) {

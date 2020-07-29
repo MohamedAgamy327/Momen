@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CredentialService, CoreService } from 'src/app/core/services';
-import { MatDialog } from '@angular/material';
 import { TourService } from 'ngx-tour-md-menu';
 import { TranslateService } from '@ngx-translate/core';
 import { SideBarList, HeaderList, MenuItemList } from 'src/app/core/lists';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',

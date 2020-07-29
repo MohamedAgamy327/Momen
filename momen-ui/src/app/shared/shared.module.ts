@@ -10,7 +10,7 @@ import { AddSpacePipe } from '../core/custom-pipes';
 import { Ng5BreadcrumbModule } from 'ng5-breadcrumb';
 import { ToastrModule } from 'ngx-toastr';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 @NgModule({
   declarations: [
     AddSpacePipe,
@@ -28,8 +28,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     FlexLayoutModule,
     Ng5BreadcrumbModule.forRoot(),
     ToastrModule.forRoot(),
-    SlickCarouselModule,
-    PdfViewerModule
+    SlickCarouselModule
   ],
   exports: [
     AddSpacePipe,
@@ -43,8 +42,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     FlexLayoutModule,
     Ng5BreadcrumbModule,
     ToastrModule,
-    SlickCarouselModule,
-    PdfViewerModule
+    SlickCarouselModule
   ]
 })
 export class SharedModule { }

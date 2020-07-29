@@ -3,9 +3,12 @@ import { Contract } from 'src/app/core/models';
 import { ContractEditDialogComponent } from './../contract-edit-dialog/contract-edit-dialog.component';
 import { ContractAddDialogComponent } from '../contract-add-dialog/contract-add-dialog.component';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { environment } from 'src/environments/environment';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-contracts',

@@ -1,8 +1,9 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { RepositoryService, FileValidationService } from 'src/app/core/services';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { ToastrService } from 'ngx-toastr';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-contract-add-dialog',

@@ -1,8 +1,8 @@
 import { Inject, Injectable, Optional } from '@angular/core';
-import { MAT_DATE_LOCALE } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { Moment } from 'moment';
 import * as moment from 'moment';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @Injectable()
 export class MomentUtcDateAdapter extends MomentDateAdapter {

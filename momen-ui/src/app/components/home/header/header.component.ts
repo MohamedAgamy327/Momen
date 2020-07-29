@@ -2,7 +2,8 @@ import { BreadcrumbService } from 'ng5-breadcrumb';
 import { Component, OnInit } from '@angular/core';
 import { CoreService, CredentialService } from 'src/app/core/services';
 import { PageTitleService } from 'src/app/core/services/page-title.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+
 declare var require;
 const screenfull = require('screenfull');
 

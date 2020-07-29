@@ -3,8 +3,12 @@ import { Category } from 'src/app/core/models';
 import { CategoryEditDialogComponent } from './../category-edit-dialog/category-edit-dialog.component';
 import { CategoryAddDialogComponent } from '../category-add-dialog/category-add-dialog.component';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort, MatSnackBar, MatDialog } from '@angular/material';
+
 import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-categories',
