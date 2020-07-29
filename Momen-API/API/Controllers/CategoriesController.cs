@@ -8,6 +8,8 @@ using Core.UnitOfWork;
 using Core.IRepository;
 using Microsoft.AspNetCore.Http;
 using API.Errors;
+using Utilities.Consts;
+using Utilities.Concatenates;
 
 namespace API.Controllers
 {
@@ -30,7 +32,7 @@ namespace API.Controllers
         public async Task<ActionResult<CategoryForGetDTO>> Post(CategoryForAddDTO model)
         {
             if (await _categoryRepository.IsExist(model.Name).ConfigureAwait(true))
-                return Conflict(new ApiResponse(409, "this resource is existed"));
+                return Conflict(new ApiResponse(409, StringConsts.EXISTED));
 
             Category category = _mapper.Map<Category>(model);
             await _categoryRepository.AddAsync(category).ConfigureAwait(true);
@@ -44,13 +46,13 @@ namespace API.Controllers
         public async Task<ActionResult<CategoryForGetDTO>> Put(int id, CategoryForEditDTO model)
         {
             if (id != model.Id)
-                return BadRequest(new ApiResponse(400, $"id: {id} isn't equal model.Id: {model.Id}"));
+                return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id,model.Id)));
 
             if (!await _categoryRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, $"resource with id: {id} doesn't exist"));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
 
             if (await _categoryRepository.IsExist(model.Id, model.Name).ConfigureAwait(true))
-                return Conflict(new ApiResponse(409, "this resource is existed"));
+                return Conflict(new ApiResponse(409, StringConsts.EXISTED));
 
             Category category = _mapper.Map<Category>(model);
             _categoryRepository.Edit(category);
@@ -64,7 +66,7 @@ namespace API.Controllers
         public async Task<ActionResult<CategoryForGetDTO>> Delete(int id)
         {
             if (!await _categoryRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, $"resource with id: {id} doesn't exist"));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
 
             Category category = await _categoryRepository.GetAsync(id).ConfigureAwait(true);
             _categoryRepository.Remove(category);
@@ -78,7 +80,7 @@ namespace API.Controllers
         public async Task<ActionResult<CategoryForGetDTO>> Get(int id)
         {
             if (!await _categoryRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, $"resource with id: {id} doesn't exist"));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
 
             Category category = await _categoryRepository.GetAsync(id).ConfigureAwait(true);
             CategoryForGetDTO categoryDto = _mapper.Map<CategoryForGetDTO>(category);

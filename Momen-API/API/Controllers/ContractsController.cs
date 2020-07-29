@@ -9,6 +9,8 @@ using Core.IRepository;
 using Microsoft.AspNetCore.Http;
 using API.Errors;
 using System.IO;
+using Utilities.Consts;
+using Utilities.Concatenates;
 
 namespace API.Controllers
 {
@@ -31,7 +33,7 @@ namespace API.Controllers
         public async Task<ActionResult<ContractForGetDTO>> Post(ContractForAddDTO model)
         {
             if (await _contractRepository.IsExist(model.Name).ConfigureAwait(true))
-                return Conflict(new ApiResponse(409, "this resource is existed"));
+                return Conflict(new ApiResponse(409, StringConsts.EXISTED));
 
             Contract contract = _mapper.Map<Contract>(model);
             await _contractRepository.AddAsync(contract).ConfigureAwait(true);
@@ -62,13 +64,13 @@ namespace API.Controllers
         public async Task<ActionResult<ContractForGetDTO>> Put(int id, ContractForEditDTO model)
         {
             if (id != model.Id)
-                return BadRequest(new ApiResponse(400, $"id: {id} isn't equal model.Id: {model.Id}"));
+                return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id,model.Id)));
 
             if (!await _contractRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, $"resource with id: {id} doesn't exist"));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
 
             if (await _contractRepository.IsExist(model.Id, model.Name).ConfigureAwait(true))
-                return Conflict(new ApiResponse(409, "this resource is existed"));
+                return Conflict(new ApiResponse(409, StringConsts.EXISTED));
 
             Contract oldContract = await _contractRepository.GetAsync(id).ConfigureAwait(true);
             Contract contract = _mapper.Map<Contract>(model);
@@ -84,12 +86,12 @@ namespace API.Controllers
         public async Task<ActionResult<ContractForGetDTO>> Delete(int id)
         {
             if (!await _contractRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, $"resource with id: {id} doesn't exist"));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
 
             Contract contract = await _contractRepository.GetAsync(id).ConfigureAwait(true);
             _contractRepository.Remove(contract);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
-            System.IO.File.Delete($"{Directory.GetCurrentDirectory()}/Content/{contract.Id}/{contract.FileName}");
+            System.IO.File.Delete($"{Directory.GetCurrentDirectory()}/Content/Contract/{contract.Id}/{contract.FileName}");
             ContractForGetDTO knwoningDto = _mapper.Map<ContractForGetDTO>(contract);
             return Ok(knwoningDto);
         }
@@ -99,7 +101,7 @@ namespace API.Controllers
         public async Task<ActionResult<ContractForGetDTO>> Get(int id)
         {
             if (!await _contractRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, $"resource with id: {id} doesn't exist"));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
 
             Contract contract = await _contractRepository.GetAsync(id).ConfigureAwait(true);
             ContractForGetDTO contractDto = _mapper.Map<ContractForGetDTO>(contract);
