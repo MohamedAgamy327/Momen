@@ -85,9 +85,9 @@ namespace API.Controllers
             Contract contract = await _contractRepository.GetAsync(id).ConfigureAwait(true);
             _contractRepository.Remove(contract);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
-            FileOperations.DeleteFile("Contract", id, contract.FileName);
-            ContractForGetDTO knwoningDto = _mapper.Map<ContractForGetDTO>(contract);
-            return Ok(knwoningDto);
+            FolderOperations.DeleteFolder("Contract", id);
+            ContractForGetDTO contractDto = _mapper.Map<ContractForGetDTO>(contract);
+            return Ok(contractDto);
         }
 
         [HttpGet("{id:int}")]
