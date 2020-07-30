@@ -1,4 +1,4 @@
-﻿namespace Utilities.Concatenates
+﻿namespace Utilities.StaticHelpers
 {
     public static class StringConcatenates
     {

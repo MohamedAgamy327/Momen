@@ -1,4 +1,4 @@
-﻿namespace Utilities.Password
+﻿namespace Utilities.StaticHelpers
 {
     public static class SecurePassword
     {

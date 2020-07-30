@@ -8,9 +8,7 @@ using Core.UnitOfWork;
 using Core.IRepository;
 using Microsoft.AspNetCore.Http;
 using API.Errors;
-using System.IO;
-using Utilities.Consts;
-using Utilities.Concatenates;
+using Utilities.StaticHelpers;
 
 namespace API.Controllers
 {
@@ -46,11 +44,7 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> UploadFile([FromForm] ContractForFileDTO model)
         {
-            Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Content/Contract"));
-            Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Content/Contract", model.Id.ToString()));
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "Content/Contract", model.Id.ToString(), model.File.FileName);
-            using FileStream fileStream = new FileStream(path, FileMode.Create);
-            await model.File.CopyToAsync(fileStream).ConfigureAwait(true);
+            FileOperations.WriteFile("Contract", model.Id, model.File);
             Contract contract = await _contractRepository.GetAsync(model.Id).ConfigureAwait(true);
             contract.FileName = model.File.FileName;
             _contractRepository.Edit(contract);
@@ -64,7 +58,7 @@ namespace API.Controllers
         public async Task<ActionResult<ContractForGetDTO>> Put(int id, ContractForEditDTO model)
         {
             if (id != model.Id)
-                return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id,model.Id)));
+                return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
 
             if (!await _contractRepository.IsExist(id).ConfigureAwait(true))
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
@@ -91,7 +85,7 @@ namespace API.Controllers
             Contract contract = await _contractRepository.GetAsync(id).ConfigureAwait(true);
             _contractRepository.Remove(contract);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
-            System.IO.File.Delete($"{Directory.GetCurrentDirectory()}/Content/Contract/{contract.Id}/{contract.FileName}");
+            FileOperations.DeleteFile("Contract", id, contract.FileName);
             ContractForGetDTO knwoningDto = _mapper.Map<ContractForGetDTO>(contract);
             return Ok(knwoningDto);
         }

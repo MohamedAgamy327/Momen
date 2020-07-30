@@ -1,4 +1,4 @@
-﻿namespace Utilities.Consts
+﻿namespace Utilities.StaticHelpers
 {
     public static class StringConsts
     {
