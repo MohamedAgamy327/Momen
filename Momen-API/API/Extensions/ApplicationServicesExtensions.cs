@@ -13,9 +13,10 @@ namespace API.Extensions
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IJWTManager, JWTManager>();
-            services.AddTransient<IVendorRepository, VendorRepository>();
+            services.AddTransient<IVendorRepository, VendorRepository>();           
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IContractRepository, ContractRepository>();
+            services.AddTransient<IVendorUserRepository, VendorUserRepository>();
             return services;
         }
     }

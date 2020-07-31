@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace Domain.Entities
 {
     public class Vendor : BaseEntity
     {
@@ -17,5 +19,6 @@
         public string PersonalIdFileName { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+        public ICollection<VendorUser> VendorUsers { get; set; }
     }
 }

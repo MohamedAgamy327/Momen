@@ -11,6 +11,10 @@ namespace API.Validator.Vendor
                    .NotNull()
                    .NotEmpty();
 
+            RuleFor(x => x.Phone)
+                   .NotNull()
+                   .NotEmpty();
+
             RuleFor(x => x.Address)
                    .NotNull()
                    .NotEmpty();

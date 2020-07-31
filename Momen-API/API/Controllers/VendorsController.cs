@@ -19,11 +19,13 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IVendorRepository _vendorRepository;
-        public VendorsController(IMapper mapper, IUnitOfWork unitOfWork, IVendorRepository vendorRepository)
+        private readonly IVendorUserRepository _vendorUserRepository;
+        public VendorsController(IMapper mapper, IUnitOfWork unitOfWork, IVendorRepository vendorRepository, IVendorUserRepository vendorUserRepository)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _vendorRepository = vendorRepository;
+            _vendorUserRepository = vendorUserRepository;
         }
 
         [HttpPost]
@@ -139,6 +141,9 @@ namespace API.Controllers
         {
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+
+            if (await _vendorUserRepository.IsExistByVendor(id).ConfigureAwait(true))
+                return Conflict(new ApiResponse(409, StringConcatenates.Exist(id, "vendors users")));
 
             Vendor vendor = await _vendorRepository.GetAsync(id).ConfigureAwait(true);
             _vendorRepository.Remove(vendor);
