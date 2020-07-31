@@ -45,9 +45,25 @@ namespace Core.Repository
         {
             return await _context.Vendors.AnyAsync(s => s.CategoryId == categoryId).ConfigureAwait(true);
         }
+        public async Task<bool> IsExistByPhone(string phone)
+        {
+            return await _context.Vendors.AnyAsync(s => s.Phone == phone).ConfigureAwait(true);
+        }
+        public async Task<bool> IsExistByEmail(string email)
+        {
+            return await _context.Vendors.AnyAsync(s => s.Email == email).ConfigureAwait(true);
+        }
         public async Task<bool> IsExist(string name, int categoryId)
         {
             return await _context.Vendors.AnyAsync(s => s.Name.ToLower() == name.ToLower() && s.CategoryId == categoryId).ConfigureAwait(true);
+        }
+        public async Task<bool> IsExistByEmail(int id, string email)
+        {
+            return await _context.Vendors.AnyAsync(s => s.Id != id && s.Email == email).ConfigureAwait(true);
+        }
+        public async Task<bool> IsExistByPhone(int id, string phone)
+        {
+            return await _context.Vendors.AnyAsync(s => s.Id != id && s.Phone == phone).ConfigureAwait(true);
         }
         public async Task<bool> IsExist(int id, string name, int categoryId)
         {

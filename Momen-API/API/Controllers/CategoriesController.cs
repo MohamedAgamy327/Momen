@@ -19,11 +19,13 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICategoryRepository _categoryRepository;
-        public CategoriesController(IMapper mapper, IUnitOfWork unitOfWork, ICategoryRepository categoryRepository)
+        private readonly IVendorRepository _vendorRepository;
+        public CategoriesController(IMapper mapper, IUnitOfWork unitOfWork, ICategoryRepository categoryRepository, IVendorRepository vendorRepository)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _categoryRepository = categoryRepository;
+            _vendorRepository = vendorRepository;
         }
 
         [HttpPost]
@@ -66,6 +68,9 @@ namespace API.Controllers
         {
             if (!await _categoryRepository.IsExist(id).ConfigureAwait(true))
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+
+            if (await _vendorRepository.IsExistByCategory(id).ConfigureAwait(true))
+                return Conflict(new ApiResponse(409, StringConcatenates.Exist(id,"vendors")));
 
             Category category = await _categoryRepository.GetAsync(id).ConfigureAwait(true);
             _categoryRepository.Remove(category);

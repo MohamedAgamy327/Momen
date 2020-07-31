@@ -11,6 +11,7 @@ namespace Data.EntitiesMap
             builder.HasKey(t => t.Id);
             builder.Property(t => t.Name).IsRequired();
             builder.Property(t => t.Email).IsRequired();
+            builder.Property(t => t.Phone).IsRequired();
             builder.Property(t => t.BranchesCount).IsRequired();
             builder.Property(t => t.Description).IsRequired();
             builder.Property(t => t.CategoryId).IsRequired();

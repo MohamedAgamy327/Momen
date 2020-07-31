@@ -42,8 +42,14 @@ namespace API.Controllers
 
         [HttpPatch("{id:int}/file")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> UploadFile([FromForm] ContractForFileDTO model)
+        public async Task<ActionResult> UploadFile(int id, [FromForm] ContractForFileDTO model)
         {
+            if (id != model.Id)
+                return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
+
+            if (!await _contractRepository.IsExist(id).ConfigureAwait(true))
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+
             FileOperations.WriteFile("Contract", model.Id, model.File);
             Contract contract = await _contractRepository.GetAsync(model.Id).ConfigureAwait(true);
             contract.FileName = model.File.FileName;
