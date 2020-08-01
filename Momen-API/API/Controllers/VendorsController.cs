@@ -48,6 +48,36 @@ namespace API.Controllers
             return Ok(vendorDto);
         }
 
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<VendorForGetDTO>> Put(int id, VendorForEditDTO model)
+        {
+            if (id != model.Id)
+                return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
+
+            if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+
+            if (await _vendorRepository.IsExist(model.Id, model.Name, model.CategoryId).ConfigureAwait(true))
+                return Conflict(new ApiResponse(409, StringConsts.EXISTED));
+
+            if (await _vendorRepository.IsExistByPhone(id, model.Phone).ConfigureAwait(true))
+                return Conflict(new ApiResponse(409, StringConcatenates.Exist("Phone", model.Phone)));
+
+            if (await _vendorRepository.IsExistByEmail(id, model.Email).ConfigureAwait(true))
+                return Conflict(new ApiResponse(409, StringConcatenates.Exist("Email", model.Email)));
+
+            Vendor oldVendor = await _vendorRepository.GetAsync(id).ConfigureAwait(true);
+            Vendor vendor = _mapper.Map<Vendor>(model);
+            vendor.LicenseFileName = oldVendor.LicenseFileName;
+            vendor.LogoFileName = oldVendor.LogoFileName;
+            vendor.PersonalIdFileName = oldVendor.PersonalIdFileName;
+            _vendorRepository.Edit(vendor);
+            await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+            VendorForGetDTO vendorDto = _mapper.Map<VendorForGetDTO>(vendor);
+            return Ok(vendorDto);
+        }
+
         [HttpPatch("{id:int}/licensefile")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult> UploadLicenseFile(int id, [FromForm] VendorForLicenseDTO model)
@@ -99,36 +129,6 @@ namespace API.Controllers
             FileOperations.WriteFile("Vendor/PersonalId", model.Id, model.File);
             Vendor vendor = await _vendorRepository.GetAsync(model.Id).ConfigureAwait(true);
             vendor.PersonalIdFileName = model.File.FileName;
-            _vendorRepository.Edit(vendor);
-            await _unitOfWork.CompleteAsync().ConfigureAwait(true);
-            VendorForGetDTO vendorDto = _mapper.Map<VendorForGetDTO>(vendor);
-            return Ok(vendorDto);
-        }
-
-        [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<VendorForGetDTO>> Put(int id, VendorForEditDTO model)
-        {
-            if (id != model.Id)
-                return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
-
-            if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
-
-            if (await _vendorRepository.IsExist(model.Id, model.Name, model.CategoryId).ConfigureAwait(true))
-                return Conflict(new ApiResponse(409, StringConsts.EXISTED));
-
-            if (await _vendorRepository.IsExistByPhone(id, model.Phone).ConfigureAwait(true))
-                return Conflict(new ApiResponse(409, StringConcatenates.Exist("Phone", model.Phone)));
-
-            if (await _vendorRepository.IsExistByEmail(id, model.Email).ConfigureAwait(true))
-                return Conflict(new ApiResponse(409, StringConcatenates.Exist("Email", model.Email)));
-
-            Vendor oldVendor = await _vendorRepository.GetAsync(id).ConfigureAwait(true);
-            Vendor vendor = _mapper.Map<Vendor>(model);
-            vendor.LicenseFileName = oldVendor.LicenseFileName;
-            vendor.LogoFileName = oldVendor.LogoFileName;
-            vendor.PersonalIdFileName = oldVendor.PersonalIdFileName;
             _vendorRepository.Edit(vendor);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
             VendorForGetDTO vendorDto = _mapper.Map<VendorForGetDTO>(vendor);
