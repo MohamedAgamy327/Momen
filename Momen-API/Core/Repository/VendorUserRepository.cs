@@ -5,6 +5,7 @@ using Core.IRepository;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Utilities.StaticHelpers;
 
 namespace Core.Repository
 {
@@ -28,6 +29,18 @@ namespace Core.Repository
         public async Task<VendorUser> GetAsync(int id)
         {
             return await _context.VendorsUsers.AsNoTracking().SingleOrDefaultAsync(s => s.Id == id);
+        }
+        public async Task<VendorUser> LoginAsync(string email, string password)
+        {
+            VendorUser vendorUser = await _context.VendorsUsers.FirstOrDefaultAsync(x => x.Email.ToLower() == email.ToLower());
+
+            if (vendorUser == null)
+                return null;
+
+            if (!SecurePassword.VerifyPasswordHash(password, vendorUser.PasswordHash, vendorUser.PasswordSalt))
+                return null;
+
+            return vendorUser;
         }
         public async Task<IEnumerable<VendorUser>> GetAsync()
         {

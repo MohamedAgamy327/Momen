@@ -49,6 +49,18 @@ namespace API.Controllers
             return Ok(vendorUserDto);
         }
 
+        [HttpPost("login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> Login(VendorUserForLoginDTO model)
+        {
+            VendorUser vendorUser = await _vendorUserRepository.LoginAsync(model.Email, model.Password).ConfigureAwait(true);
+
+            if (vendorUser == null)
+                return Unauthorized(new ApiResponse(401, StringConsts.UNAUTHORIZED));
+
+            return Ok();
+        }
+
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<VendorUserForGetDTO>> Put(int id, VendorUserForEditDTO model)
@@ -75,6 +87,45 @@ namespace API.Controllers
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
             VendorUserForGetDTO vendorUserDto = _mapper.Map<VendorUserForGetDTO>(vendorUser);
             return Ok(vendorUserDto);
+        }
+
+        [HttpPatch("{id}/ChangePassword")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> ChangePassword(int id, VendorUserForChangePasswordDTO model)
+        {
+            if (id != model.Id)
+                return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
+
+            if (!await _vendorUserRepository.IsExist(id).ConfigureAwait(true))
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+
+            VendorUser vendorUser = await _vendorUserRepository.GetAsync(model.Id).ConfigureAwait(true);
+            SecurePassword.CreatePasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            vendorUser.PasswordHash = passwordHash;
+            vendorUser.PasswordSalt = passwordSalt;
+            vendorUser.IsRandom = false;
+            _vendorUserRepository.Edit(vendorUser);
+            await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+            return Ok();
+        }
+
+        [HttpPatch("{id}/ResetPassword")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> ResetPassword(int id)
+        {
+            if (!await _vendorUserRepository.IsExist(id).ConfigureAwait(true))
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+
+            VendorUser vendorUser = await _vendorUserRepository.GetAsync(id).ConfigureAwait(true);
+            string password = SecurePassword.GeneratePassword(8);
+            SecurePassword.CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+            vendorUser.PasswordHash = passwordHash;
+            vendorUser.PasswordSalt = passwordSalt;
+            vendorUser.IsRandom = true;
+            _vendorUserRepository.Edit(vendorUser);
+            await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+            Email.Send("Momen", vendorUser.Email, "password", password);
+            return Ok();
         }
 
         [HttpDelete("{id:int}")]

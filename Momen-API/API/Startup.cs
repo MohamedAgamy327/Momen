@@ -14,6 +14,7 @@ using API.Extensions;
 using System;
 using API.Middleware;
 using Microsoft.Extensions.FileProviders;
+using MicroElements.Swashbuckle.FluentValidation;
 
 namespace API
 {
@@ -28,11 +29,17 @@ namespace API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
 
             services.AddApplicationServices();
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddControllers();
+            services.AddControllers()
+                      .AddFluentValidation(c =>
+                      {
+                          c.RegisterValidatorsFromAssemblyContaining<Startup>();
+                          c.ValidatorFactoryType = typeof(HttpContextServiceProviderValidatorFactory);
+                      });
 
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -47,8 +54,9 @@ namespace API
                 {
                     options.EnableEndpointRouting = false;
                     options.Filters.Add(typeof(ValidationFilter));
-                }).AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<Startup>())
-                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+                });
+                //.AddFluentValidation(fvc => fvc.RegisterValidatorsFromAssemblyContaining<Startup>())
+                //.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddSwaggerDocumentation();
 
@@ -62,7 +70,7 @@ namespace API
                              .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
                          ValidateIssuer = false,
                          ValidateAudience = false,
-                         ValidateLifetime=true,
+                         ValidateLifetime = true,
                          ClockSkew = TimeSpan.Zero
                      };
                  });
