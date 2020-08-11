@@ -69,7 +69,7 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
 
             if (!await _vendorUserRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor User", id)));
 
             if (await _vendorUserRepository.IsExistByPhone(id, model.Phone).ConfigureAwait(true))
                 return Conflict(new ApiResponse(409, StringConcatenates.Exist("Phone", model.Phone)));
@@ -97,7 +97,7 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
 
             if (!await _vendorUserRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor User", id)));
 
             VendorUser vendorUser = await _vendorUserRepository.GetAsync(model.Id).ConfigureAwait(true);
             SecurePassword.CreatePasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
@@ -114,7 +114,7 @@ namespace API.Controllers
         public async Task<ActionResult> ResetPassword(int id)
         {
             if (!await _vendorUserRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor User", id)));
 
             VendorUser vendorUser = await _vendorUserRepository.GetAsync(id).ConfigureAwait(true);
             string password = SecurePassword.GeneratePassword(8);
@@ -133,7 +133,7 @@ namespace API.Controllers
         public async Task<ActionResult<VendorUserForGetDTO>> Delete(int id)
         {
             if (!await _vendorUserRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor User", id)));
 
             VendorUser vendorUser = await _vendorUserRepository.GetAsync(id).ConfigureAwait(true);
             _vendorUserRepository.Remove(vendorUser);
@@ -147,7 +147,7 @@ namespace API.Controllers
         public async Task<ActionResult<VendorUserForGetDTO>> Get(int id)
         {
             if (!await _vendorUserRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor User", id)));
 
             VendorUser vendorUser = await _vendorUserRepository.GetAsync(id).ConfigureAwait(true);
             VendorUserForGetDTO vendorUserDto = _mapper.Map<VendorUserForGetDTO>(vendorUser);

@@ -6,9 +6,9 @@
         {
             return $"id: {id} isn't equal model.Id: {modelId}";
         }
-        public static string NotExist(int id)
+        public static string NotExist(string resource, int id)
         {
-            return $"resource with id: {id} doesn't exist";
+            return $"{resource} with id: {id} doesn't exist";
         }
         public static string Exist(string property, string value)
         {

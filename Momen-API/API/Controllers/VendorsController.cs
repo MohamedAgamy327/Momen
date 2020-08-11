@@ -56,7 +56,7 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
 
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
             if (await _vendorRepository.IsExist(model.Id, model.Name, model.CategoryId).ConfigureAwait(true))
                 return Conflict(new ApiResponse(409, StringConsts.EXISTED));
@@ -86,7 +86,7 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
 
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
             FileOperations.WriteFile("Vendor/License", model.Id, model.File);
             Vendor vendor = await _vendorRepository.GetAsync(model.Id).ConfigureAwait(true);
@@ -105,7 +105,7 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
 
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
             FileOperations.WriteFile("Vendor/Logo", model.Id, model.File);
             Vendor vendor = await _vendorRepository.GetAsync(model.Id).ConfigureAwait(true);
@@ -124,7 +124,7 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
 
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
             FileOperations.WriteFile("Vendor/PersonalId", model.Id, model.File);
             Vendor vendor = await _vendorRepository.GetAsync(model.Id).ConfigureAwait(true);
@@ -140,7 +140,7 @@ namespace API.Controllers
         public async Task<ActionResult<VendorForGetDTO>> Delete(int id)
         {
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
             if (await _vendorUserRepository.IsExistByVendor(id).ConfigureAwait(true))
                 return Conflict(new ApiResponse(409, StringConcatenates.Exist(id, "vendors users")));
@@ -160,7 +160,7 @@ namespace API.Controllers
         public async Task<ActionResult<VendorForGetDTO>> Get(int id)
         {
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
             Vendor vendor = await _vendorRepository.GetAsync(id).ConfigureAwait(true);
             VendorForGetDTO vendorDto = _mapper.Map<VendorForGetDTO>(vendor);

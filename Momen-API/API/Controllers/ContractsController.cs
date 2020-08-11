@@ -48,7 +48,7 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
 
             if (!await _contractRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Contract", id)));
 
             if (await _contractRepository.IsExist(model.Id, model.Name).ConfigureAwait(true))
                 return Conflict(new ApiResponse(409, StringConsts.EXISTED));
@@ -70,7 +70,7 @@ namespace API.Controllers
                 return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
 
             if (!await _contractRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Contract", id)));
 
             FileOperations.WriteFile("Contract", model.Id, model.File);
             Contract contract = await _contractRepository.GetAsync(model.Id).ConfigureAwait(true);
@@ -86,7 +86,7 @@ namespace API.Controllers
         public async Task<ActionResult<ContractForGetDTO>> Delete(int id)
         {
             if (!await _contractRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Contract", id)));
 
             Contract contract = await _contractRepository.GetAsync(id).ConfigureAwait(true);
             _contractRepository.Remove(contract);
@@ -101,7 +101,7 @@ namespace API.Controllers
         public async Task<ActionResult<ContractForGetDTO>> Get(int id)
         {
             if (!await _contractRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Contract", id)));
 
             Contract contract = await _contractRepository.GetAsync(id).ConfigureAwait(true);
             ContractForGetDTO contractDto = _mapper.Map<ContractForGetDTO>(contract);

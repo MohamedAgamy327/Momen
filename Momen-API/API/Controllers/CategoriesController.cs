@@ -36,8 +36,10 @@ namespace API.Controllers
                 return Conflict(new ApiResponse(409, StringConsts.EXISTED));
 
             Category category = _mapper.Map<Category>(model);
+
             await _categoryRepository.AddAsync(category).ConfigureAwait(true);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             CategoryForGetDTO categoryDto = _mapper.Map<CategoryForGetDTO>(category);
             return Ok(categoryDto);
         }
@@ -47,17 +49,19 @@ namespace API.Controllers
         public async Task<ActionResult<CategoryForGetDTO>> Put(int id, CategoryForEditDTO model)
         {
             if (id != model.Id)
-                return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id,model.Id)));
+                return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
 
             if (!await _categoryRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Category", id)));
 
             if (await _categoryRepository.IsExist(model.Id, model.Name).ConfigureAwait(true))
                 return Conflict(new ApiResponse(409, StringConsts.EXISTED));
 
             Category category = _mapper.Map<Category>(model);
+
             _categoryRepository.Edit(category);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             CategoryForGetDTO categoryDto = _mapper.Map<CategoryForGetDTO>(category);
             return Ok(categoryDto);
         }
@@ -67,14 +71,16 @@ namespace API.Controllers
         public async Task<ActionResult<CategoryForGetDTO>> Delete(int id)
         {
             if (!await _categoryRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Category", id)));
 
             if (await _vendorRepository.IsExistByCategory(id).ConfigureAwait(true))
-                return Conflict(new ApiResponse(409, StringConcatenates.Exist(id,"vendors")));
+                return Conflict(new ApiResponse(409, StringConcatenates.Exist(id, "vendors")));
 
             Category category = await _categoryRepository.GetAsync(id).ConfigureAwait(true);
+
             _categoryRepository.Remove(category);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             CategoryForGetDTO knwoningDto = _mapper.Map<CategoryForGetDTO>(category);
             return Ok(knwoningDto);
         }
@@ -84,7 +90,7 @@ namespace API.Controllers
         public async Task<ActionResult<CategoryForGetDTO>> Get(int id)
         {
             if (!await _categoryRepository.IsExist(id).ConfigureAwait(true))
-                return NotFound(new ApiResponse(404, StringConcatenates.NotExist(id)));
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Category", id)));
 
             Category category = await _categoryRepository.GetAsync(id).ConfigureAwait(true);
             CategoryForGetDTO categoryDto = _mapper.Map<CategoryForGetDTO>(category);
