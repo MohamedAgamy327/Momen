@@ -34,8 +34,10 @@ namespace API.Controllers
                 return Conflict(new ApiResponse(409, StringConsts.EXISTED));
 
             Contract contract = _mapper.Map<Contract>(model);
+
             await _contractRepository.AddAsync(contract).ConfigureAwait(true);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             ContractForGetDTO contractDto = _mapper.Map<ContractForGetDTO>(contract);
             return Ok(contractDto);
         }
@@ -55,9 +57,11 @@ namespace API.Controllers
 
             Contract oldContract = await _contractRepository.GetAsync(id).ConfigureAwait(true);
             Contract contract = _mapper.Map<Contract>(model);
+
             contract.FileName = oldContract.FileName;
             _contractRepository.Edit(contract);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             ContractForGetDTO contractDto = _mapper.Map<ContractForGetDTO>(contract);
             return Ok(contractDto);
         }
@@ -73,10 +77,13 @@ namespace API.Controllers
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Contract", id)));
 
             FileOperations.WriteFile("Contract", model.Id, model.File);
+
             Contract contract = await _contractRepository.GetAsync(model.Id).ConfigureAwait(true);
+
             contract.FileName = model.File.FileName;
             _contractRepository.Edit(contract);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             ContractForGetDTO contractDto = _mapper.Map<ContractForGetDTO>(contract);
             return Ok(contractDto);
         }
@@ -89,9 +96,12 @@ namespace API.Controllers
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Contract", id)));
 
             Contract contract = await _contractRepository.GetAsync(id).ConfigureAwait(true);
+
             _contractRepository.Remove(contract);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             FolderOperations.DeleteFolder("Contract", id);
+
             ContractForGetDTO contractDto = _mapper.Map<ContractForGetDTO>(contract);
             return Ok(contractDto);
         }

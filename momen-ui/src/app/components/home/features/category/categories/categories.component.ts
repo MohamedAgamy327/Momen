@@ -73,7 +73,7 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  edit(category) {
+  edit(category: Category) {
     const dialogRef = this.dialog.open(CategoryEditDialogComponent, {
       data: category
     });
@@ -87,7 +87,7 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  showDelete(category) {
+  showDelete(category: Category) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: { type: 'this category' }
     });
@@ -99,7 +99,7 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  delete(id) {
+  delete(id: any) {
     this.categoryService.delete(id).subscribe(
       (res: any) => {
         this.toastrService.success('Deleted Successfully', 'Delete');

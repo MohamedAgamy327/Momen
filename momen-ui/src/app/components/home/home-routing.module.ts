@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent, children: [
       { path: 'categories', loadChildren: () => import('./features/category/category.module').then(m => m.CategoryModule) },
-      // { path: 'contracts', component: ContractsComponent },
+      { path: 'contracts', loadChildren: () => import('./features/contract/contract.module').then(m => m.ContractModule) }
     ]
   },
   {

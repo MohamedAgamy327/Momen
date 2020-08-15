@@ -1,79 +1,80 @@
 <div class="table-manage-list">
 
-    <mat-card>
-        <div fxLayout="row" fxLayoutAlign="space-between">
-            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="3rem">
-                <h4>Contracts List</h4>
+  <mat-card>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="3rem">
+        <h4>Contracts List</h4>
 
-                <mat-form-field class="filter-input" appearance="outline">
-                    <mat-label>Search</mat-label>
-                    <input matInput type="text" [(ngModel)]="filter" autocomplete="off" (keyup)="applyFilter($event.target.value)" placeholder="Search">
-                    <mat-icon matSuffix *ngIf="!filter">search</mat-icon>
-                    <mat-icon class="clickable" matSuffix *ngIf="filter" (click)="clearFilter()">close</mat-icon>
-                </mat-form-field>
+        <mat-form-field class="filter-input" appearance="outline">
+          <mat-label>Search</mat-label>
+          <input matInput type="text" [(ngModel)]="filter" autocomplete="off" (keyup)="applyFilter($event.target.value)"
+            placeholder="Search">
+          <mat-icon matSuffix *ngIf="!filter">search</mat-icon>
+          <mat-icon class="clickable" matSuffix *ngIf="filter" (click)="clearFilter()">close</mat-icon>
+        </mat-form-field>
 
-            </div>
-            <div class="mrgn-l-md mrgn-b-md " fxLayoutAlign="start center">
-                <mat-card-actions class="mat-pad-none margin-none">
-                    <button mat-raised-button mat-button-sm mat-fab color="primary" (click)="add()">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                </mat-card-actions>
-            </div>
-        </div>
+      </div>
+      <div class="mrgn-l-md mrgn-b-md " fxLayoutAlign="start center">
+        <mat-card-actions class="mat-pad-none margin-none">
+          <button mat-raised-button mat-button-sm mat-fab color="primary" (click)="add()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-card-actions>
+      </div>
+    </div>
 
-        <mat-divider></mat-divider>
-        <div class="table-responsive">
-            <table class="full-wid" mat-table [dataSource]="dataSource">
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef> Name </th>
-                    <td mat-cell *matCellDef="let element">
-                        <div class="make-ellipse clickable" (click)="edit(element)">{{element.name}} </div>
-                    </td>
-                </ng-container>
+    <mat-divider></mat-divider>
+    <div class="table-responsive">
+      <table class="full-wid" mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="make-ellipse clickable" (click)="edit(element)">{{element.name}} </div>
+          </td>
+        </ng-container>
 
-                <ng-container matColumnDef="description">
-                    <th mat-header-cell *matHeaderCellDef>Description</th>
-                    <td mat-cell *matCellDef="let element">
-                        <div class="make-ellipse clickable" (click)="edit(element)">{{element.description}} </div>
-                    </td>
-                </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="make-ellipse clickable" (click)="edit(element)">{{element.description}} </div>
+          </td>
+        </ng-container>
 
 
-                <ng-container matColumnDef="fileName">
-                    <th mat-header-cell *matHeaderCellDef>File Name</th>
-                    <td mat-cell *matCellDef="let element">
-                        <div class="make-ellipse clickable" (click)="edit(element)">{{element.fileName}} </div>
-                    </td>
-                </ng-container>
+        <ng-container matColumnDef="fileName">
+          <th mat-header-cell *matHeaderCellDef>File Name</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="make-ellipse clickable" (click)="edit(element)">{{element.fileName}} </div>
+          </td>
+        </ng-container>
 
-                <ng-container matColumnDef="action" class="actions-padding">
-                    <th mat-header-cell *matHeaderCellDef class="actions-padding">Actions</th>
-                    <td mat-cell *matCellDef="let element">
-                        <a href="{{environment.serverFile + element.path}}" target="_blank">
-                            <button mat-icon-button>
-                            <mat-icon matTooltip="Download" aria-label="download" class="mat-icon-grey .table-icon"
-                               >get_app</mat-icon>
-                        </button>
-                        </a>
-                        <button mat-icon-button>
-                            <mat-icon matTooltip="Edit" aria-label="Edit" class="mat-icon-grey .table-icon"
-                                (click)="edit(element)">edit</mat-icon>
-                        </button>
-                        <button mat-icon-button (click)="delete(element)">
-                            <mat-icon matTooltip="Delete" aria-label="Delete" class="mat-icon-grey .table-icon">delete
-                            </mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
+        <ng-container matColumnDef="action" class="actions-padding">
+          <th mat-header-cell *matHeaderCellDef class="actions-padding">Actions</th>
+          <td mat-cell *matCellDef="let element">
+            <a href="{{environment.serverFile + element.path}}" target="_blank">
+              <button mat-icon-button>
+                <mat-icon matTooltip="Download" aria-label="download" class="mat-icon-grey .table-icon">get_app
+                </mat-icon>
+              </button>
+            </a>
+            <button mat-icon-button>
+              <mat-icon matTooltip="Edit" aria-label="Edit" class="mat-icon-grey .table-icon" (click)="edit(element)">
+                edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="showDelete(element)">
+              <mat-icon matTooltip="Delete" aria-label="Delete" class="mat-icon-grey .table-icon">delete
+              </mat-icon>
+            </button>
+          </td>
+        </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
-        </div>
-        <div class="pagination">
-            <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons>
-            </mat-paginator>
-        </div>
-    </mat-card>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+    <div class="pagination">
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </mat-card>
 </div>

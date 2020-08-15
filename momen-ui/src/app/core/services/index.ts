@@ -7,6 +7,7 @@ export * from './page-title.service';
 
 export * from './api/account.service';
 export * from './api/category.service';
+export * from './api/contract.service';
 
 
 

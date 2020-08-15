@@ -34,8 +34,8 @@ export class ContractService {
     return this.http.get<Contract>(`${environment.serverUrl}contracts/${id}`);
   }
 
-  getAll(page, size, term): Observable<Contract> {
-    return this.http.get<Contract>(`${environment.serverUrl}contracts/${page}/${size}?term=${term}`);
+  getAll(): Observable<Contract> {
+    return this.http.get<Contract>(`${environment.serverUrl}contracts`);
   }
 
 }

@@ -9,6 +9,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { ContractService } from 'src/app/core/services/api/contract.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contracts',
@@ -30,7 +32,8 @@ export class ContractsComponent implements OnInit {
 
   constructor(
     private pageTitleService: PageTitleService,
-    // private repository: RepositoryService,
+    private contractService: ContractService,
+    private toastrService: ToastrService,
     private dialog: MatDialog
   ) { }
 
@@ -40,11 +43,11 @@ export class ContractsComponent implements OnInit {
   }
 
   getContracts() {
-    // this.repository.get('contracts').subscribe(
-    //   (res: any) => {
-    //     this.contracts = res;
-    //     this.refreshData();
-    //   });
+    this.contractService.getAll().subscribe(
+      (res: any) => {
+        this.contracts = res;
+        this.refreshData();
+      });
   }
 
   refreshData() {
@@ -74,7 +77,7 @@ export class ContractsComponent implements OnInit {
     });
   }
 
-  edit(contract) {
+  edit(contract: Contract) {
     const dialogRef = this.dialog.open(ContractEditDialogComponent, {
       data: contract
     });
@@ -88,18 +91,26 @@ export class ContractsComponent implements OnInit {
     });
   }
 
-  delete(contract) {
+  showDelete(contract: Contract) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { id: contract.id, controller: 'contracts', type: 'this contract' }
+      data: { type: 'this contract' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const index = this.contracts.findIndex(f => f.id === result.id);
-        this.contracts.splice(index, 1);
-        this.refreshData();
+        this.delete(contract.id);
       }
     });
+  }
+
+  delete(id: number) {
+    this.contractService.delete(id).subscribe(
+      (res: any) => {
+        this.toastrService.success('Deleted Successfully', 'Delete');
+        const index = this.contracts.findIndex(f => f.id === res.id);
+        this.contracts.splice(index, 1);
+        this.refreshData();
+      });
   }
 
 }

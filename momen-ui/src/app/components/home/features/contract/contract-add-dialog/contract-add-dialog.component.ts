@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { FileValidationService } from 'src/app/core/services';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ContractService } from 'src/app/core/services/api/contract.service';
 
 @Component({
   selector: 'app-contract-add-dialog',
@@ -13,16 +14,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ContractAddDialogComponent {
 
   addForm: FormGroup;
-  public pdfCtrl: FormControl = new FormControl('', Validators.required);
   @ViewChild('pdfInput') pdfInput;
-  pdfFormData: FormData;
 
   constructor(
     private fileValidationService: FileValidationService,
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ContractAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    // private repository: RepositoryService,
+    private contractService: ContractService,
     private toastrService: ToastrService
   ) {
     this.createForm();
@@ -31,7 +30,9 @@ export class ContractAddDialogComponent {
   createForm() {
     this.addForm = this.formBuilder.group({
       name: ['', Validators.required],
-      description: ['']
+      description: [''],
+      pdf: ['', Validators.required],
+      pdfSource: ['']
     }
     );
   }
@@ -40,37 +41,37 @@ export class ContractAddDialogComponent {
     return this.addForm.controls[control].hasError(error);
   }
 
-  uploadPdf(event) {
-    this.pdfFormData = new FormData();
+  uploadPdf(event: any) {
     if (this.fileValidationService.checkInvalidPDF(event.target.files[0])) {
-      this.pdfCtrl.setValue('');
+      this.addForm.patchValue({ pdf: '' });
       this.toastrService.error('Invalid PDF', 'Error');
     } else {
-      const file = event.target.files[0];
-      this.pdfFormData.append('file', file, file.name);
+      this.addForm.patchValue({ pdfSource: event.target.files[0] });
     }
   }
 
-  clearPdfInput($event) {
+  clearPdfInput($event: any) {
     this.pdfInput.clear($event);
-    this.pdfCtrl.setValue('');
+    this.addForm.patchValue({ pdf: '' });
   }
 
   save() {
-    // this.repository.post('contracts', this.addForm.value).subscribe(
-    //   (res: any) => {
-    //     this.toastrService.success('Added Successfully', 'Add');
-    //     this.patchPdf(res.id);
-    //   });
+    this.contractService.create(this.addForm.value).subscribe(
+      (res: any) => {
+        this.toastrService.success('Added Successfully', 'Add');
+        this.uploadFile(res.id);
+      });
   }
 
-  patchPdf(id) {
-    // this.pdfFormData.append('id', id);
-    // this.repository.patch(`contracts/${id}/file`, this.pdfFormData).subscribe(
-    //   (res: any) => {
-    //     this.toastrService.success('PDF File Uploaded Successfully', 'Upload');
-    //     this.dialogRef.close(res);
-    //   });
+  uploadFile(id: string) {
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('file', this.addForm.value.pdfSource, this.addForm.value.pdfSource.name);
+    this.contractService.uploadFile(id, formData).subscribe(
+      (res: any) => {
+        this.toastrService.success('PDF File uploaded successfully', 'upload');
+        this.dialogRef.close(res);
+      });
   }
 
 }
