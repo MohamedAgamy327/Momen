@@ -1,7 +1,6 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { RepositoryService, FileValidationService } from 'src/app/core/services';
-
+import { FileValidationService } from 'src/app/core/services';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -23,7 +22,7 @@ export class ContractAddDialogComponent {
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ContractAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private repository: RepositoryService,
+    // private repository: RepositoryService,
     private toastrService: ToastrService
   ) {
     this.createForm();
@@ -58,20 +57,20 @@ export class ContractAddDialogComponent {
   }
 
   save() {
-    this.repository.post('contracts', this.addForm.value).subscribe(
-      (res: any) => {
-        this.toastrService.success('Added Successfully', 'Add');
-        this.patchPdf(res.id);
-      });
+    // this.repository.post('contracts', this.addForm.value).subscribe(
+    //   (res: any) => {
+    //     this.toastrService.success('Added Successfully', 'Add');
+    //     this.patchPdf(res.id);
+    //   });
   }
 
   patchPdf(id) {
-    this.pdfFormData.append('id', id);
-    this.repository.patch(`contracts/${id}/file`, this.pdfFormData).subscribe(
-      (res: any) => {
-        this.toastrService.success('PDF File Uploaded Successfully', 'Upload');
-        this.dialogRef.close(res);
-      });
+    // this.pdfFormData.append('id', id);
+    // this.repository.patch(`contracts/${id}/file`, this.pdfFormData).subscribe(
+    //   (res: any) => {
+    //     this.toastrService.success('PDF File Uploaded Successfully', 'Upload');
+    //     this.dialogRef.close(res);
+    //   });
   }
 
 }

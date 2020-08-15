@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RepositoryService } from 'src/app/core/services';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CategoryService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-category-add-dialog',
@@ -18,7 +18,7 @@ export class CategoryAddDialogComponent {
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<CategoryAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private repository: RepositoryService,
+    private categoryService: CategoryService,
     private toastrService: ToastrService
   ) {
     this.createForm();
@@ -37,13 +37,11 @@ export class CategoryAddDialogComponent {
   }
 
   save() {
-    this.repository.post('categories', this.addForm.value).subscribe(
+    this.categoryService.create(this.addForm.value).subscribe(
       (res: any) => {
         this.toastrService.success('Added Successfully', 'Add');
         this.dialogRef.close(res);
       });
   }
-
-
 
 }

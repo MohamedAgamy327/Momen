@@ -1,14 +1,14 @@
-import { RepositoryService, PageTitleService } from 'src/app/core/services';
+import { PageTitleService, CategoryService } from 'src/app/core/services';
 import { Category } from 'src/app/core/models';
-import { CategoryEditDialogComponent } from './../category-edit-dialog/category-edit-dialog.component';
+import { CategoryEditDialogComponent } from '../category-edit-dialog/category-edit-dialog.component';
 import { CategoryAddDialogComponent } from '../category-add-dialog/category-add-dialog.component';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-
-import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from 'src/app/components/home';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-categories',
@@ -28,7 +28,8 @@ export class CategoriesComponent implements OnInit {
 
   constructor(
     private pageTitleService: PageTitleService,
-    private repository: RepositoryService,
+    private categoryService: CategoryService,
+    private toastrService: ToastrService,
     private dialog: MatDialog
   ) { }
 
@@ -38,7 +39,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   getCategories() {
-    this.repository.get('categories').subscribe(
+    this.categoryService.getAll().subscribe(
       (res: any) => {
         this.categories = res;
         this.refreshData();
@@ -86,18 +87,26 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  delete(category) {
+  showDelete(category) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: { id: category.id, controller: 'categories', type: 'this category' }
+      data: { type: 'this category' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const index = this.categories.findIndex(f => f.id === result.id);
-        this.categories.splice(index, 1);
-        this.refreshData();
+        this.delete(category.id);
       }
     });
+  }
+
+  delete(id) {
+    this.categoryService.delete(id).subscribe(
+      (res: any) => {
+        this.toastrService.success('Deleted Successfully', 'Delete');
+        const index = this.categories.findIndex(f => f.id === res.id);
+        this.categories.splice(index, 1);
+        this.refreshData();
+      });
   }
 
 }

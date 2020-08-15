@@ -101,8 +101,8 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IReadOnlyList<CategoryForGetDTO>>> Get()
         {
-            List<CategoryForGetDTO> categorys = _mapper.Map<List<CategoryForGetDTO>>(await _categoryRepository.GetAsync().ConfigureAwait(true));
-            return Ok(categorys);
+            List<CategoryForGetDTO> categories = _mapper.Map<List<CategoryForGetDTO>>(await _categoryRepository.GetAsync().ConfigureAwait(true));
+            return Ok(categories);
         }
     }
 }

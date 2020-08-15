@@ -1,7 +1,6 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-
-import { RepositoryService, FileValidationService } from 'src/app/core/services';
+import { FileValidationService } from 'src/app/core/services';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -23,7 +22,7 @@ export class ContractEditDialogComponent {
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ContractEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private repository: RepositoryService,
+    // private repository: RepositoryService,
     private toastrService: ToastrService
   ) {
     this.createForm();
@@ -58,24 +57,24 @@ export class ContractEditDialogComponent {
   }
 
   update() {
-    this.repository.put(`contracts/${this.data.id}`, this.editForm.value).subscribe(
-      (res: any) => {
-        if (this.pdfFormData) {
-          this.patchPdf(res.id);
-        } else {
-          this.dialogRef.close(res);
-        }
-        this.toastrService.success('Edited Successfully', 'Edit');
-      });
+    // this.repository.put(`contracts/${this.data.id}`, this.editForm.value).subscribe(
+    //   (res: any) => {
+    //     if (this.pdfFormData) {
+    //       this.patchPdf(res.id);
+    //     } else {
+    //       this.dialogRef.close(res);
+    //     }
+    //     this.toastrService.success('Edited Successfully', 'Edit');
+    //   });
   }
 
   patchPdf(id) {
     this.pdfFormData.append('id', id);
-    this.repository.patch(`contracts/${id}/file`, this.pdfFormData).subscribe(
-      (res: any) => {
-        this.toastrService.success('PDF File Uploaded Successfully', 'Upload');
-        this.dialogRef.close(res);
-      });
+    // this.repository.patch(`contracts/${id}/file`, this.pdfFormData).subscribe(
+    //   (res: any) => {
+    //     this.toastrService.success('PDF File Uploaded Successfully', 'Upload');
+    //     this.dialogRef.close(res);
+    //   });
   }
 
 }

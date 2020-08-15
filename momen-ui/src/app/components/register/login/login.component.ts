@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CredentialService, RepositoryService } from 'src/app/core/services';
+import { CredentialService } from 'src/app/core/services';
 import { Router } from '@angular/router';
 import { LoginSliderList } from 'src/app/core/lists';
 
@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private credentialService: CredentialService,
-    private repository: RepositoryService,
     private router: Router,
     private formBuilder: FormBuilder
   ) {
@@ -50,24 +49,24 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.repository.post('account/login', this.loginForm.value).subscribe(
-      (res: any) => {
+    // this.repository.post('account/login', this.loginForm.value).subscribe(
+    //   (res: any) => {
 
-        if (this.loginForm.value.rememberMe) {
-          localStorage.setItem('clinic-username', this.loginForm.value.name);
-          localStorage.setItem('clinic-password', this.loginForm.value.password);
-        } else {
-          localStorage.removeItem('clinic-username');
-          localStorage.removeItem('clinic-password');
-        }
+    //     if (this.loginForm.value.rememberMe) {
+    //       localStorage.setItem('clinic-username', this.loginForm.value.name);
+    //       localStorage.setItem('clinic-password', this.loginForm.value.password);
+    //     } else {
+    //       localStorage.removeItem('clinic-username');
+    //       localStorage.removeItem('clinic-password');
+    //     }
 
-        localStorage.setItem('momen-token', res.token);
-        if (this.credentialService.isDoctor()) {
-          this.router.navigate(['/home']);
-        } else if (this.credentialService.isNurse()) {
-          this.router.navigate(['/home/ar']);
-        }
-      });
+    //     localStorage.setItem('momen-token', res.token);
+    //     if (this.credentialService.isDoctor()) {
+    //       this.router.navigate(['/home']);
+    //     } else if (this.credentialService.isNurse()) {
+    //       this.router.navigate(['/home/ar']);
+    //     }
+    //   });
   }
 
 }

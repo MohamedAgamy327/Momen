@@ -5,12 +5,12 @@ import {
   HeaderComponent,
   LanguageDropDownComponent,
   SideBarComponent,
-  CategoriesComponent,
-  CategoryAddDialogComponent,
-  CategoryEditDialogComponent,
-  ContractAddDialogComponent,
-  ContractsComponent,
-  ContractEditDialogComponent
+  // CategoriesComponent,
+  // CategoryAddDialogComponent,
+  // CategoryEditDialogComponent,
+  // ContractAddDialogComponent,
+  // ContractsComponent,
+  // ContractEditDialogComponent
 } from '.';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -31,19 +31,19 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HeaderComponent,
     LanguageDropDownComponent,
     SideBarComponent,
-    CategoriesComponent,
-    CategoryAddDialogComponent,
-    CategoryEditDialogComponent,
-    ContractAddDialogComponent,
-    ContractsComponent,
-    ContractEditDialogComponent
+    // CategoriesComponent,
+    // CategoryAddDialogComponent,
+    // CategoryEditDialogComponent,
+    // ContractAddDialogComponent,
+    // ContractsComponent,
+    // ContractEditDialogComponent
   ],
   entryComponents: [
     DeleteDialogComponent,
-    CategoryAddDialogComponent,
-    CategoryEditDialogComponent,
-    ContractAddDialogComponent,
-    ContractEditDialogComponent
+    // CategoryAddDialogComponent,
+    // CategoryEditDialogComponent,
+    // ContractAddDialogComponent,
+    // ContractEditDialogComponent
   ],
   imports: [
     CommonModule,

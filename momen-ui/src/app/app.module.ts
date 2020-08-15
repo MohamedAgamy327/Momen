@@ -1,7 +1,7 @@
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import {  TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { AppComponent, PageNotFoundComponent, LoginComponent } from './components';
+import { AppComponent, PageNotFoundComponent } from './components';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +14,7 @@ import { SharedModule } from './shared/shared.module';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { BreadcrumbService } from 'ng5-breadcrumb';
+import { LoginComponent } from './components/register';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

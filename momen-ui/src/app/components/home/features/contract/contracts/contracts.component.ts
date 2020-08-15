@@ -1,9 +1,9 @@
-import { RepositoryService, PageTitleService } from 'src/app/core/services';
+import { PageTitleService } from 'src/app/core/services';
 import { Contract } from 'src/app/core/models';
-import { ContractEditDialogComponent } from './../contract-edit-dialog/contract-edit-dialog.component';
+import { ContractEditDialogComponent } from '../contract-edit-dialog/contract-edit-dialog.component';
 import { ContractAddDialogComponent } from '../contract-add-dialog/contract-add-dialog.component';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { DeleteDialogComponent } from '../../delete-dialog/delete-dialog.component';
+import { DeleteDialogComponent } from 'src/app/components/home';
 import { environment } from 'src/environments/environment';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -30,7 +30,7 @@ export class ContractsComponent implements OnInit {
 
   constructor(
     private pageTitleService: PageTitleService,
-    private repository: RepositoryService,
+    // private repository: RepositoryService,
     private dialog: MatDialog
   ) { }
 
@@ -40,11 +40,11 @@ export class ContractsComponent implements OnInit {
   }
 
   getContracts() {
-    this.repository.get('contracts').subscribe(
-      (res: any) => {
-        this.contracts = res;
-        this.refreshData();
-      });
+    // this.repository.get('contracts').subscribe(
+    //   (res: any) => {
+    //     this.contracts = res;
+    //     this.refreshData();
+    //   });
   }
 
   refreshData() {
