@@ -5,12 +5,19 @@ export const MenuItemList: MenuItem[] = [
     state: 'home/categories',
     name: 'Category List',
     type: 'link',
-    icon: 'supervisor_account'
+    icon: 'category'
   },
   {
     state: 'home/contracts',
     name: 'Contract List',
     type: 'link',
-    icon: 'supervisor_account'
+    icon: 'assignment'
+  }
+  ,
+  {
+    state: 'home/vendors',
+    name: 'Vendor List',
+    type: 'link',
+    icon: 'admin_panel_settings'
   }
 ];

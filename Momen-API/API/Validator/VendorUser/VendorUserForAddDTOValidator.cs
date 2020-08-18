@@ -22,8 +22,8 @@ namespace API.Validator.VendorUser
                    .NotEmpty();
 
             RuleFor(x => x.VendorId)
-                  .NotNull()
-                  .NotEmpty();
+                   .NotNull()
+                   .NotEmpty();
 
             RuleFor(x => x.Role)
                    .NotNull()

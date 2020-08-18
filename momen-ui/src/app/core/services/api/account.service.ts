@@ -13,7 +13,7 @@ export class AccountService {
     private http: HttpClient
   ) { }
 
-  login(model): Observable<any> {
+  login(model: any): Observable<any> {
     return this.http.post(environment.serverUrl + 'accounts/login', model);
   }
 }

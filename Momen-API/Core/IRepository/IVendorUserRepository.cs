@@ -11,7 +11,7 @@ namespace Core.IRepository
         void Remove(VendorUser vendorUser);
         Task<VendorUser> GetAsync(int id);
         Task<VendorUser> LoginAsync(string email, string password);
-        Task<IEnumerable<VendorUser>> GetAsync();
+        Task<IEnumerable<VendorUser>> GetByVendorAsync(int vendorId);
         Task<bool> IsExist(int id);
         Task<bool> IsExistByVendor(int vendorId);
         Task<bool> IsExistByEmail(string email);

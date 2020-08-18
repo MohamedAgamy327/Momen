@@ -40,6 +40,11 @@ namespace API.Validator.Vendor
                    .NotNull()
                    .NotEmpty();
 
+            RuleFor(x => x.VendorUser)
+                   .NotNull()
+                   .NotEmpty()
+                   .SetValidator(new UserForVendorAddDTOValidator());
+
         }
     }
 }

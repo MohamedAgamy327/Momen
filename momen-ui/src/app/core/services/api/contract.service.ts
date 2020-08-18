@@ -14,23 +14,23 @@ export class ContractService {
     private http: HttpClient
   ) { }
 
-  create(model): Observable<any> {
+  create(model: any): Observable<any> {
     return this.http.post<Contract>(`${environment.serverUrl}contracts`, model);
   }
 
-  edit(id, model): Observable<any> {
+  edit(id: number, model: any): Observable<any> {
     return this.http.put<Contract>(`${environment.serverUrl}contracts/${id}`, model);
   }
 
-  uploadFile(id, model): Observable<any> {
+  uploadFile(id: number, model: any): Observable<any> {
     return this.http.patch(`${environment.serverUrl}contracts/${id}/file`, model);
   }
 
-  delete(id): Observable<any> {
+  delete(id: number): Observable<any> {
     return this.http.delete<Contract>(`${environment.serverUrl}contracts/${id}`);
   }
 
-  get(id): Observable<Contract> {
+  get(id: number): Observable<Contract> {
     return this.http.get<Contract>(`${environment.serverUrl}contracts/${id}`);
   }
 

@@ -154,11 +154,11 @@ namespace API.Controllers
             return Ok(vendorUserDto);
         }
 
-        [HttpGet]
+        [HttpGet("vendors/{vendorId:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IReadOnlyList<VendorUserForGetDTO>>> Get()
+        public async Task<ActionResult<IReadOnlyList<VendorUserForGetDTO>>> GetByVendor(int vendorId)
         {
-            List<VendorUserForGetDTO> vendorUsers = _mapper.Map<List<VendorUserForGetDTO>>(await _vendorUserRepository.GetAsync().ConfigureAwait(true));
+            List<VendorUserForGetDTO> vendorUsers = _mapper.Map<List<VendorUserForGetDTO>>(await _vendorUserRepository.GetByVendorAsync(vendorId).ConfigureAwait(true));
             return Ok(vendorUsers);
         }
     }

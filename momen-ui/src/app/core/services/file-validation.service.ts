@@ -7,12 +7,12 @@ import { Injectable } from '@angular/core';
 
 export class FileValidationService {
 
-  checkInvalidFilesTypes(files) {
+  checkInvalidFilesTypes(files: any) {
     const invalidTypes = [...files].some(file => !file.type.startsWith('image/'));
     return invalidTypes;
   }
 
-  checkInvalidPDF(file) {
+  checkInvalidPDF(file: any) {
     const invalidTypes = !file.type.includes('application/pdf');
     return invalidTypes;
   }

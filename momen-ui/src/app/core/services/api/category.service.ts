@@ -14,19 +14,19 @@ export class CategoryService {
     private http: HttpClient
   ) { }
 
-  create(model): Observable<any> {
+  create(model: any): Observable<any> {
     return this.http.post<Category>(`${environment.serverUrl}Categories`, model);
   }
 
-  edit(id, model): Observable<any> {
+  edit(id: number, model: any): Observable<any> {
     return this.http.put<Category>(`${environment.serverUrl}Categories/${id}`, model);
   }
 
-  delete(id): Observable<any> {
+  delete(id: number): Observable<any> {
     return this.http.delete<Category>(`${environment.serverUrl}Categories/${id}`);
   }
 
-  get(id): Observable<Category> {
+  get(id: number): Observable<Category> {
     return this.http.get<Category>(`${environment.serverUrl}Categories/${id}`);
   }
 

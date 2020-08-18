@@ -42,9 +42,9 @@ namespace Core.Repository
 
             return vendorUser;
         }
-        public async Task<IEnumerable<VendorUser>> GetAsync()
+        public async Task<IEnumerable<VendorUser>> GetByVendorAsync(int vendorId)
         {
-            return await _context.VendorsUsers.OrderByDescending(o => o.Id).ToListAsync();
+            return await _context.VendorsUsers.Where(w => w.VendorId == vendorId).OrderByDescending(o => o.Id).ToListAsync();
         }
         public void Remove(VendorUser vendorUser)
         {

@@ -1,4 +1,6 @@
-﻿namespace API.DTO.Vendor
+﻿using API.DTO.VendorUser;
+
+namespace API.DTO.Vendor
 {
     public class VendorForAddDTO
     {
@@ -13,5 +15,6 @@
         public string Twitter { get; set; }
         public string Instagram { get; set; }
         public int CategoryId { get; set; }
+        public UserForVendorAddDTO VendorUser { get; set; }
     }
 }

@@ -41,9 +41,30 @@ namespace API.Controllers
             if (await _vendorRepository.IsExistByEmail(model.Email).ConfigureAwait(true))
                 return Conflict(new ApiResponse(409, StringConcatenates.Exist("Email", model.Email)));
 
+            if (await _vendorUserRepository.IsExistByPhone(model.VendorUser.Phone).ConfigureAwait(true))
+                return Conflict(new ApiResponse(409, StringConcatenates.Exist("Phone", model.VendorUser.Phone)));
+
+            if (await _vendorUserRepository.IsExistByEmail(model.VendorUser.Email).ConfigureAwait(true))
+                return Conflict(new ApiResponse(409, StringConcatenates.Exist("Email", model.VendorUser.Email)));
+
             Vendor vendor = _mapper.Map<Vendor>(model);
+
+            VendorUser vendorUser = _mapper.Map<VendorUser>(model.VendorUser);
+
+            string password = SecurePassword.GeneratePassword(8);
+
+            SecurePassword.CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+            vendorUser.PasswordHash = passwordHash;
+            vendorUser.PasswordSalt = passwordSalt;
+
+            vendor.VendorUsers.Add(vendorUser);
             await _vendorRepository.AddAsync(vendor).ConfigureAwait(true);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
+            Email.Send("Momen", model.Email, "welcome", "welcome");
+            Email.Send("Momen", vendorUser.Email, "password", password);
+
+            vendor = await _vendorRepository.GetAsync(vendor.Id).ConfigureAwait(true);
             VendorForGetDTO vendorDto = _mapper.Map<VendorForGetDTO>(vendor);
             return Ok(vendorDto);
         }
@@ -69,11 +90,14 @@ namespace API.Controllers
 
             Vendor oldVendor = await _vendorRepository.GetAsync(id).ConfigureAwait(true);
             Vendor vendor = _mapper.Map<Vendor>(model);
+
             vendor.LicenseFileName = oldVendor.LicenseFileName;
             vendor.LogoFileName = oldVendor.LogoFileName;
             vendor.PersonalIdFileName = oldVendor.PersonalIdFileName;
+
             _vendorRepository.Edit(vendor);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             VendorForGetDTO vendorDto = _mapper.Map<VendorForGetDTO>(vendor);
             return Ok(vendorDto);
         }
@@ -89,10 +113,14 @@ namespace API.Controllers
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
             FileOperations.WriteFile("Vendor/License", model.Id, model.File);
+
             Vendor vendor = await _vendorRepository.GetAsync(model.Id).ConfigureAwait(true);
+
             vendor.LicenseFileName = model.File.FileName;
+
             _vendorRepository.Edit(vendor);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             VendorForGetDTO vendorDto = _mapper.Map<VendorForGetDTO>(vendor);
             return Ok(vendorDto);
         }
@@ -127,10 +155,14 @@ namespace API.Controllers
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
             FileOperations.WriteFile("Vendor/PersonalId", model.Id, model.File);
+
             Vendor vendor = await _vendorRepository.GetAsync(model.Id).ConfigureAwait(true);
+
             vendor.PersonalIdFileName = model.File.FileName;
+
             _vendorRepository.Edit(vendor);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             VendorForGetDTO vendorDto = _mapper.Map<VendorForGetDTO>(vendor);
             return Ok(vendorDto);
         }
@@ -142,15 +174,15 @@ namespace API.Controllers
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
-            if (await _vendorUserRepository.IsExistByVendor(id).ConfigureAwait(true))
-                return Conflict(new ApiResponse(409, StringConcatenates.Exist(id, "vendors users")));
-
             Vendor vendor = await _vendorRepository.GetAsync(id).ConfigureAwait(true);
+
             _vendorRepository.Remove(vendor);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             FolderOperations.DeleteFolder("Vendor/License", id);
             FolderOperations.DeleteFolder("Vendor/Logo", id);
             FolderOperations.DeleteFolder("Vendor/PersonalId", id);
+
             VendorForGetDTO vendorDto = _mapper.Map<VendorForGetDTO>(vendor);
             return Ok(vendorDto);
         }
