@@ -1,7 +1,7 @@
 import { PageTitleService } from 'src/app/core/services';
 import { VendorUser } from 'src/app/core/models';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { DeleteDialogComponent } from 'src/app/components/home';
+import { DeleteDialogComponent, ConfirmDialogComponent } from 'src/app/components/home';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -78,6 +78,29 @@ export class VendorUsersComponent implements OnInit {
     this.vendorUserService.delete(id).subscribe(
       (res: any) => {
         this.toastrService.success('Deleted Successfully', 'Delete');
+        const index = this.vendorUsers.findIndex(f => f.id === res.id);
+        this.vendorUsers.splice(index, 1);
+        this.refreshData();
+      });
+  }
+
+  showResetPasswordConfirm(id: number) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { question: 'Do you want to confirm reseting password?', title: 'Reset' }
+
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.resetPassword(id);
+      }
+    });
+  }
+
+  resetPassword(id: number) {
+    this.vendorUserService.resetPassword(id).subscribe(
+      (res: any) => {
+        this.toastrService.success('Reset Password Successfully', 'Reset');
         const index = this.vendorUsers.findIndex(f => f.id === res.id);
         this.vendorUsers.splice(index, 1);
         this.refreshData();

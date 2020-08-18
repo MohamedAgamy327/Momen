@@ -42,9 +42,12 @@ namespace API.Controllers
             SecurePassword.CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
             vendorUser.PasswordHash = passwordHash;
             vendorUser.PasswordSalt = passwordSalt;
+
             await _vendorUserRepository.AddAsync(vendorUser).ConfigureAwait(true);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             Email.Send("Momen", vendorUser.Email, "password", password);
+
             VendorUserForGetDTO vendorUserDto = _mapper.Map<VendorUserForGetDTO>(vendorUser);
             return Ok(vendorUserDto);
         }
@@ -79,12 +82,15 @@ namespace API.Controllers
 
             VendorUser oldVendorUser = await _vendorUserRepository.GetAsync(id).ConfigureAwait(true);
             VendorUser vendorUser = _mapper.Map<VendorUser>(model);
+
             vendorUser.PasswordHash = oldVendorUser.PasswordHash;
             vendorUser.PasswordSalt = oldVendorUser.PasswordSalt;
             vendorUser.VendorId = oldVendorUser.VendorId;
             vendorUser.IsRandom = oldVendorUser.IsRandom;
+
             _vendorUserRepository.Edit(vendorUser);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             VendorUserForGetDTO vendorUserDto = _mapper.Map<VendorUserForGetDTO>(vendorUser);
             return Ok(vendorUserDto);
         }
@@ -104,8 +110,10 @@ namespace API.Controllers
             vendorUser.PasswordHash = passwordHash;
             vendorUser.PasswordSalt = passwordSalt;
             vendorUser.IsRandom = false;
+
             _vendorUserRepository.Edit(vendorUser);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             return Ok();
         }
 
@@ -117,14 +125,18 @@ namespace API.Controllers
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor User", id)));
 
             VendorUser vendorUser = await _vendorUserRepository.GetAsync(id).ConfigureAwait(true);
+
             string password = SecurePassword.GeneratePassword(8);
             SecurePassword.CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
             vendorUser.PasswordHash = passwordHash;
             vendorUser.PasswordSalt = passwordSalt;
             vendorUser.IsRandom = true;
+
             _vendorUserRepository.Edit(vendorUser);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             Email.Send("Momen", vendorUser.Email, "password", password);
+
             return Ok();
         }
 
@@ -136,8 +148,10 @@ namespace API.Controllers
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor User", id)));
 
             VendorUser vendorUser = await _vendorUserRepository.GetAsync(id).ConfigureAwait(true);
+
             _vendorUserRepository.Remove(vendorUser);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
             VendorUserForGetDTO vendorUserDto = _mapper.Map<VendorUserForGetDTO>(vendorUser);
             return Ok(vendorUserDto);
         }

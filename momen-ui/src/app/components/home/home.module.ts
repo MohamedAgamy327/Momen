@@ -4,7 +4,8 @@ import {
   FooterComponent,
   HeaderComponent,
   LanguageDropDownComponent,
-  SideBarComponent
+  SideBarComponent,
+  ConfirmDialogComponent
 } from '.';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -24,10 +25,12 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FooterComponent,
     HeaderComponent,
     LanguageDropDownComponent,
-    SideBarComponent
+    SideBarComponent,
+    ConfirmDialogComponent
   ],
   entryComponents: [
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,

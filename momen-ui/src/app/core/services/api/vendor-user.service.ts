@@ -22,6 +22,10 @@ export class VendorUserService {
     return this.http.put<VendorUser>(`${environment.serverUrl}vendorUsers/${id}`, model);
   }
 
+  resetPassword(id: number): Observable<any> {
+    return this.http.patch<any>(`${environment.serverUrl}vendorUsers/${id}/ResetPassword`, null);
+  }
+
   delete(id: number): Observable<any> {
     return this.http.delete<VendorUser>(`${environment.serverUrl}vendorUsers/${id}`);
   }
