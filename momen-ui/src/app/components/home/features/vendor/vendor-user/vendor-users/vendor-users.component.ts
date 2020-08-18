@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { VendorUserService } from 'src/app/core/services';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
+import { VendorUserAddDialogComponent } from '../vendor-user-add-dialog/vendor-user-add-dialog.component';
+import { VendorUserEditDialogComponent } from '../vendor-user-edit-dialog/vendor-user-edit-dialog.component';
 
 @Component({
   selector: 'app-vendor-users',
@@ -62,14 +64,41 @@ export class VendorUsersComponent implements OnInit {
     this.applyFilter(this.filter);
   }
 
-  showDelete(user: VendorUser) {
+  showAdd() {
+    const dialogRef = this.dialog.open(VendorUserAddDialogComponent, {
+      data: Number(this.route.snapshot.params.vendorId)
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.vendorUsers.unshift(result);
+        this.refreshData();
+      }
+    });
+  }
+
+  showEdit(vendorUser: VendorUser) {
+    const dialogRef = this.dialog.open(VendorUserEditDialogComponent, {
+      data: vendorUser
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const index = this.vendorUsers.findIndex(f => f.id === result.id);
+        this.vendorUsers[index] = result;
+        this.refreshData();
+      }
+    });
+  }
+
+  showDelete(vendorUser: VendorUser) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: { type: 'this Vendor User' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.delete(user.id);
+        this.delete(vendorUser.id);
       }
     });
   }

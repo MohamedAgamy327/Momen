@@ -14,18 +14,18 @@ export class LoadingInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.method === 'POST') {
-      return next.handle(req);
-    }
-    if (req.method === 'PUT') {
-      return next.handle(req);
-    }
-    if (req.method === 'PATCH') {
-      return next.handle(req);
-    }
-    if (req.method === 'DELETE') {
-      return next.handle(req);
-    }
+    // if (req.method === 'POST') {
+    //   return next.handle(req);
+    // }
+    // if (req.method === 'PUT') {
+    //   return next.handle(req);
+    // }
+    // if (req.method === 'PATCH') {
+    //   return next.handle(req);
+    // }
+    // if (req.method === 'DELETE') {
+    //   return next.handle(req);
+    // }
 
     this.busyService.busy();
     return next.handle(req).pipe(

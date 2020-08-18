@@ -16,7 +16,7 @@
       </div>
       <div class="mrgn-l-md mrgn-b-md " fxLayoutAlign="start center">
         <mat-card-actions class="mat-pad-none margin-none">
-          <button mat-raised-button mat-button-sm mat-fab color="primary">
+          <button mat-raised-button mat-button-sm mat-fab color="primary" (click)="showAdd()">
             <mat-icon>add</mat-icon>
           </button>
         </mat-card-actions>
@@ -29,14 +29,14 @@
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Name </th>
           <td mat-cell *matCellDef="let element">
-            <div class="make-ellipse clickable">{{element.name}} </div>
+            <div class="make-ellipse clickable" (click)="showEdit(element)">{{element.name}} </div>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef>Email</th>
           <td mat-cell *matCellDef="let element">
-            <div class="make-ellipse clickable">{{element.email}} </div>
+            <div class="make-ellipse clickable" (click)="showEdit(element)">{{element.email}} </div>
           </td>
         </ng-container>
 
@@ -44,14 +44,14 @@
         <ng-container matColumnDef="phone">
           <th mat-header-cell *matHeaderCellDef>Phone</th>
           <td mat-cell *matCellDef="let element">
-            <div class="make-ellipse clickable">{{element.phone}} </div>
+            <div class="make-ellipse clickable" (click)="showEdit(element)">{{element.phone}} </div>
           </td>
         </ng-container>
 
         <ng-container matColumnDef="role">
           <th mat-header-cell *matHeaderCellDef>Role</th>
           <td mat-cell *matCellDef="let element">
-            <div class="make-ellipse clickable">{{element.role}} </div>
+            <div class="make-ellipse clickable" (click)="showEdit(element)">{{element.role}} </div>
           </td>
         </ng-container>
 
@@ -65,7 +65,7 @@
               </mat-icon>
             </button>
 
-            <button mat-icon-button>
+            <button mat-icon-button (click)="showEdit(element)">
               <mat-icon matTooltip="Edit" aria-label="Edit" class="mat-icon-grey .table-icon">
                 edit</mat-icon>
             </button>
