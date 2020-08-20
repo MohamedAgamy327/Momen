@@ -7,6 +7,7 @@
         public string Email { get; set; }
         public string Phone { get; set; }
         public string IsBlocked { get; set; }
-        public string ProfilePicturePath { get; set; }
+        public string PictureName { get; set; }
+        public string PicturePath { get; set; }
     }
 }

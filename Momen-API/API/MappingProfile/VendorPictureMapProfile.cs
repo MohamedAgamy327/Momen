@@ -9,7 +9,7 @@ namespace API.MappingProfile
         public VendorPictureMapProfile()
         {
             CreateMap<VendorPicture, VendorPictureForGetDTO>()
-                     .ForMember(dest => dest.Path, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.FileName) ? $"Vendors/{src.VendorId}/Pictures/{src.FileName}" : null));
+                     .ForMember(dest => dest.PicturePath, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.PictureName) ? $"Vendors/{src.VendorId}/Pictures/{src.PictureName}" : null));
 
         }
     }

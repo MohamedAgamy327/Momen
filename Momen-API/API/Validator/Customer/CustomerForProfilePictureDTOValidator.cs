@@ -11,7 +11,7 @@ namespace API.Validator.Customer
                    .NotNull()
                    .NotEmpty();
 
-            RuleFor(x => x.File)
+            RuleFor(x => x.Picture)
                    .NotNull()
                    .NotEmpty();
         }

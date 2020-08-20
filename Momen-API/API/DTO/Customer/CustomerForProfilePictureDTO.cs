@@ -8,7 +8,7 @@ namespace API.DTO.Customer
         [FromForm(Name = "Id")]
         public int Id { get; set; }
 
-        [FromForm(Name = "file")]
-        public IFormFile File { get; set; }
+        [FromForm(Name = "picture")]
+        public IFormFile Picture { get; set; }
     }
 }

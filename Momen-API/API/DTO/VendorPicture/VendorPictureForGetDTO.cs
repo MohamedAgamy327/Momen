@@ -3,7 +3,7 @@
     public class VendorPictureForGetDTO
     {
         public int Id { get; set; }
-        public string FileName { get; set; }
-        public string Path { get; set; }
+        public string PictureName { get; set; }
+        public string PicturePath { get; set; }
     }
 }

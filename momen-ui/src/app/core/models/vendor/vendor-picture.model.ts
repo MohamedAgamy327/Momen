@@ -1,5 +1,5 @@
 export interface VendorPicture {
   id: number;
-  fileName: string;
-  path: string;
+  pictureName: string;
+  picturePath: string;
 }

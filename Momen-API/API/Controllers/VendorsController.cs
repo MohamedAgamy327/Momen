@@ -91,9 +91,9 @@ namespace API.Controllers
             Vendor oldVendor = await _vendorRepository.GetAsync(id).ConfigureAwait(true);
             Vendor vendor = _mapper.Map<Vendor>(model);
 
-            vendor.LicenseFileName = oldVendor.LicenseFileName;
-            vendor.LogoFileName = oldVendor.LogoFileName;
-            vendor.PersonalIdFileName = oldVendor.PersonalIdFileName;
+            vendor.LicenseName = oldVendor.LicenseName;
+            vendor.LogoName = oldVendor.LogoName;
+            vendor.PersonalIdName = oldVendor.PersonalIdName;
 
             _vendorRepository.Edit(vendor);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
@@ -112,11 +112,11 @@ namespace API.Controllers
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
-            FileOperations.WriteFile($"Vendors/{model.Id}/License", model.File);
+            FileOperations.WriteFile($"Vendors/{model.Id}/License", model.License);
 
             Vendor vendor = await _vendorRepository.GetAsync(model.Id).ConfigureAwait(true);
 
-            vendor.LicenseFileName = model.File.FileName;
+            vendor.LicenseName = model.License.FileName;
 
             _vendorRepository.Edit(vendor);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
@@ -135,9 +135,9 @@ namespace API.Controllers
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
-            FileOperations.WriteFile($"Vendors/{model.Id}/Logo", model.File);
+            FileOperations.WriteFile($"Vendors/{model.Id}/Logo", model.Logo);
             Vendor vendor = await _vendorRepository.GetAsync(model.Id).ConfigureAwait(true);
-            vendor.LogoFileName = model.File.FileName;
+            vendor.LogoName = model.Logo.FileName;
             _vendorRepository.Edit(vendor);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
             VendorForGetDTO vendorDto = _mapper.Map<VendorForGetDTO>(vendor);
@@ -154,11 +154,11 @@ namespace API.Controllers
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
-            FileOperations.WriteFile($"Vendors/{model.Id}/PersonalId", model.File);
+            FileOperations.WriteFile($"Vendors/{model.Id}/PersonalId", model.PersonalId);
 
             Vendor vendor = await _vendorRepository.GetAsync(model.Id).ConfigureAwait(true);
 
-            vendor.PersonalIdFileName = model.File.FileName;
+            vendor.PersonalIdName = model.PersonalId.FileName;
 
             _vendorRepository.Edit(vendor);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);

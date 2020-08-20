@@ -18,9 +18,9 @@ namespace Domain.Entities
         public string Facebook { get; set; }
         public string Twitter { get; set; }
         public string Instagram { get; set; }
-        public string LogoFileName { get; set; }
-        public string LicenseFileName { get; set; }
-        public string PersonalIdFileName { get; set; }
+        public string LogoName { get; set; }
+        public string LicenseName { get; set; }
+        public string PersonalIdName { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public ICollection<VendorUser> VendorUsers { get; set; }

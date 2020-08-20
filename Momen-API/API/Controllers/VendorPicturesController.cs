@@ -43,7 +43,7 @@ namespace API.Controllers
                 VendorPicture vendorPicture = new VendorPicture
                 {
                     VendorId = model.VendorId,
-                    FileName = file.FileName
+                    PictureName = file.FileName
                 };
                 await _vendorPictureRepository.AddAsync(vendorPicture).ConfigureAwait(true);
             }
@@ -64,7 +64,7 @@ namespace API.Controllers
 
             _vendorPictureRepository.Remove(vendorPicture);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
-            FileOperations.DeleteFile($"Vendors/{vendorPicture.VendorId}/Pictures", vendorPicture.FileName);
+            FileOperations.DeleteFile($"Vendors/{vendorPicture.VendorId}/Pictures", vendorPicture.PictureName);
 
             VendorPictureForGetDTO vendorPictureDto = _mapper.Map<VendorPictureForGetDTO>(vendorPicture);
             return Ok(vendorPictureDto);

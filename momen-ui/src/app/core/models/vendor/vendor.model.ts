@@ -14,4 +14,7 @@ export interface Vendor {
   logoPath: string;
   licensePath: string;
   personalIdPath: string;
+  logoName: string;
+  licenseName: string;
+  personalIdName: string;
 }

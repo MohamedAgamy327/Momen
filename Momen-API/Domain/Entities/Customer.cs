@@ -9,6 +9,6 @@
         public byte[] PasswordSalt { get; set; }
         public bool IsRandom { get; set; }
         public bool IsBlocked { get; set; }
-        public string ProfilePictureName { get; set; }
+        public string PictureName { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace API.DTO.Vendor
         [FromForm(Name = "Id")]
         public int Id { get; set; }
 
-        [FromForm(Name = "file")]
-        public IFormFile File { get; set; }
+        [FromForm(Name = "logo")]
+        public IFormFile Logo { get; set; }
     }
 }

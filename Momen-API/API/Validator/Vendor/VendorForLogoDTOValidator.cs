@@ -11,7 +11,7 @@ namespace API.Validator.Contract
                    .NotNull()
                    .NotEmpty();
 
-            RuleFor(x => x.File)
+            RuleFor(x => x.Logo)
                    .NotNull()
                    .NotEmpty();
         }

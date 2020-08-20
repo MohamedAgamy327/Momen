@@ -5,5 +5,6 @@ export * from './language-drop-down/language-drop-down.component';
 export * from './side-bar/side-bar.component';
 export * from './delete-dialog/delete-dialog.component';
 export * from './confirm-dialog/confirm-dialog.component';
+export * from './picture-dialog/picture-dialog.component';
 
 

@@ -31,7 +31,7 @@
         <ng-container matColumnDef="fileName">
           <th mat-header-cell *matHeaderCellDef> File Name </th>
           <td mat-cell *matCellDef="let element">
-            <div class="make-ellipse clickable">{{element.fileName}} </div>
+            <div class="make-ellipse clickable" (click)="show(element)">{{element.pictureName}} </div>
           </td>
         </ng-container>
 

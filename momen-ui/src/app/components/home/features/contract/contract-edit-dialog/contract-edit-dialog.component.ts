@@ -69,7 +69,7 @@ export class ContractEditDialogComponent {
   uploadFile(id: any) {
     const formData = new FormData();
     formData.append('id', id);
-    formData.append('file', this.editForm.value.pdfSource, this.editForm.value.pdfSource.name);
+    formData.append('pdf', this.editForm.value.pdfSource, this.editForm.value.pdfSource.name);
     this.contractService.uploadFile(id, formData).subscribe(
       (res: any) => {
         this.toastrService.success('PDF File Uploaded Successfully', 'Upload');

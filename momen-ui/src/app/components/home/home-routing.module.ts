@@ -8,6 +8,7 @@ const routes: Routes = [
     path: '', component: HomeComponent, children: [
       { path: 'categories', loadChildren: () => import('./features/category/category.module').then(m => m.CategoryModule) },
       { path: 'contracts', loadChildren: () => import('./features/contract/contract.module').then(m => m.ContractModule) },
+      { path: 'customers', loadChildren: () => import('./features/customer/customer.module').then(m => m.CustomerModule) },
       { path: 'vendors', loadChildren: () => import('./features/vendor/vendor.module').then(m => m.VendorModule) }
     ]
   },

@@ -12,12 +12,17 @@ export const MenuItemList: MenuItem[] = [
     name: 'Contract List',
     type: 'link',
     icon: 'assignment'
-  }
-  ,
+  },
   {
     state: 'home/vendors',
     name: 'Vendor List',
     type: 'link',
     icon: 'admin_panel_settings'
+  },
+  {
+    state: 'home/customers',
+    name: 'Customer List',
+    type: 'link',
+    icon: 'people_alt'
   }
 ];

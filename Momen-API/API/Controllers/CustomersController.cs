@@ -87,7 +87,7 @@ namespace API.Controllers
             customer.PasswordSalt = oldCustomer.PasswordSalt;
             customer.IsBlocked = oldCustomer.IsBlocked;
             customer.IsRandom = oldCustomer.IsRandom;
-            customer.ProfilePictureName = oldCustomer.ProfilePictureName;
+            customer.PictureName = oldCustomer.PictureName;
 
             _customerRepository.Edit(customer);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
@@ -106,11 +106,11 @@ namespace API.Controllers
             if (!await _customerRepository.IsExist(id).ConfigureAwait(true))
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Customers", id)));
 
-            FileOperations.WriteFile($"Customers/{model.Id}", model.File);
+            FileOperations.WriteFile($"Customers/{model.Id}", model.Picture);
 
             Customer customer = await _customerRepository.GetAsync(model.Id).ConfigureAwait(true);
 
-            customer.ProfilePictureName = model.File.FileName;
+            customer.PictureName = model.Picture.FileName;
             _customerRepository.Edit(customer);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
 

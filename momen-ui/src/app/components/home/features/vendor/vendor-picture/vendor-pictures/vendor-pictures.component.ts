@@ -2,13 +2,12 @@ import { VendorPictureService, PageTitleService } from 'src/app/core/services';
 import { VendorPicture } from 'src/app/core/models';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VendorPictureShowDialogComponent } from '../vendor-picture-show-dialog/vendor-picture-show-dialog.component';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { DeleteDialogComponent } from 'src/app/components/home';
+import { DeleteDialogComponent, PictureDialogComponent } from 'src/app/components/home';
 
 @Component({
   selector: 'app-vendor-pictures',
@@ -36,9 +35,7 @@ export class VendorPicturesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.router.url.includes('vendorPicture')) {
-      this.pageTitleService.setTitle('Vendor Picture Files');
-    }
+    this.pageTitleService.setTitle('Vendor Picture');
     this.getVendorPictures(this.route.snapshot.params.vendorId);
   }
 
@@ -88,8 +85,8 @@ export class VendorPicturesComponent implements OnInit {
   }
 
   show(file: any) {
-    this.dialog.open(VendorPictureShowDialogComponent, {
-      data: file
+    this.dialog.open(PictureDialogComponent, {
+      data: { path: file.picturePath, title: 'Vendor Picture' }
     });
   }
 

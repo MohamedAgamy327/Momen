@@ -14,6 +14,9 @@
         public string Twitter { get; set; }
         public string Instagram { get; set; }
         public string CategoryName { get; set; }
+        public string LogoName { get; set; }
+        public string LicenseName { get; set; }
+        public string PersonalIdName{ get; set; }
         public string LogoPath { get; set; }
         public string LicensePath { get; set; }
         public string PersonalIdPath { get; set; }

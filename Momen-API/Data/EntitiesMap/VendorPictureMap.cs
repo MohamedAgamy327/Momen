@@ -9,7 +9,7 @@ namespace Data.EntitiesMap
         public void Configure(EntityTypeBuilder<VendorPicture> builder)
         {
             builder.HasKey(t => t.Id);
-            builder.Property(t => t.FileName).IsRequired();
+            builder.Property(t => t.PictureName).IsRequired();
             builder.HasOne(h => h.Vendor).WithMany(w => w.VendorPictures).HasForeignKey(h => h.VendorId);
         }
     }

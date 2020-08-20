@@ -8,7 +8,7 @@ namespace API.DTO.Contract
         [FromForm(Name = "Id")]
         public int Id { get; set; }
 
-        [FromForm(Name = "file")]
-        public IFormFile File { get; set; }
+        [FromForm(Name = "pdf")]
+        public IFormFile Pdf { get; set; }
     }
 }

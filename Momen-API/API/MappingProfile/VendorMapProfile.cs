@@ -12,9 +12,9 @@ namespace API.MappingProfile
             CreateMap<VendorForEditDTO, Vendor>();
 
             CreateMap<Vendor, VendorForGetDTO>()
-                      .ForMember(dest => dest.LogoPath, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.LogoFileName) ? $"Vendors/{src.Id}/Logo/{src.LogoFileName}" : null))
-                      .ForMember(dest => dest.PersonalIdPath, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.PersonalIdFileName) ? $"Vendors/{src.Id}/PersonalId/{src.LogoFileName}" : null))
-                      .ForMember(dest => dest.LicensePath, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.LicenseFileName) ? $"Vendors/{src.Id}/License/{src.LogoFileName}" : null));
+                      .ForMember(dest => dest.LogoPath, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.LogoName) ? $"Vendors/{src.Id}/Logo/{src.LogoName}" : null))
+                      .ForMember(dest => dest.PersonalIdPath, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.PersonalIdName) ? $"Vendors/{src.Id}/PersonalId/{src.PersonalIdName}" : null))
+                      .ForMember(dest => dest.LicensePath, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.LicenseName) ? $"Vendors/{src.Id}/License/{src.LicenseName}" : null));
         }
     }
 }

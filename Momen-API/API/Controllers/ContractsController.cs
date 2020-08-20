@@ -58,7 +58,7 @@ namespace API.Controllers
             Contract oldContract = await _contractRepository.GetAsync(id).ConfigureAwait(true);
             Contract contract = _mapper.Map<Contract>(model);
 
-            contract.FileName = oldContract.FileName;
+            contract.PdfName = oldContract.PdfName;
             _contractRepository.Edit(contract);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
 
@@ -76,11 +76,11 @@ namespace API.Controllers
             if (!await _contractRepository.IsExist(id).ConfigureAwait(true))
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Contracts", id)));
 
-            FileOperations.WriteFile($"Contracts/{model.Id}", model.File);
+            FileOperations.WriteFile($"Contracts/{model.Id}", model.Pdf);
 
             Contract contract = await _contractRepository.GetAsync(model.Id).ConfigureAwait(true);
 
-            contract.FileName = model.File.FileName;
+            contract.PdfName = model.Pdf.FileName;
             _contractRepository.Edit(contract);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
 
