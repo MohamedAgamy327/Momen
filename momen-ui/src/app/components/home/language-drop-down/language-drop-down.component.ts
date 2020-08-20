@@ -20,7 +20,7 @@ export class LanguageDropDownComponent {
 
   }
 
-  setLang(lang) {
+  setLang(lang: any) {
     for (const data of this.langArray) {
       if (data.value === lang) {
         this.selectImage = data.img;

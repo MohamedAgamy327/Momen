@@ -9,7 +9,7 @@ import { CoreService } from 'src/app/core/services';
   styleUrls: ['./side-bar.component.css']
 })
 
-export class SideBarComponent implements OnInit {
+export class SideBarComponent {
 
   @Input() menuList: any;
   @Input() verticalMenuStatus: boolean;
@@ -18,9 +18,7 @@ export class SideBarComponent implements OnInit {
     public translate: TranslateService,
     private router: Router,
     public coreService: CoreService
-    ) { }
+  ) { }
 
-  ngOnInit() {
-  }
 
 }

@@ -76,7 +76,7 @@ namespace API.Controllers
             if (!await _contractRepository.IsExist(id).ConfigureAwait(true))
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Contract", id)));
 
-            FileOperations.WriteFile("Contract", model.Id, model.File);
+            FileOperations.WriteFile($"Contract/{model.Id}", model.File);
 
             Contract contract = await _contractRepository.GetAsync(model.Id).ConfigureAwait(true);
 
@@ -100,7 +100,7 @@ namespace API.Controllers
             _contractRepository.Remove(contract);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
 
-            FolderOperations.DeleteFolder("Contract", id);
+            FolderOperations.DeleteFolder($"Contract/{id}");
 
             ContractForGetDTO contractDto = _mapper.Map<ContractForGetDTO>(contract);
             return Ok(contractDto);

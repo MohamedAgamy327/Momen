@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
     this.customizerIn = !this.customizerIn;
   }
 
-  collapseSidebar(event) {
+  collapseSidebar(event: any) {
     if (event.checked) {
       this.coreService.collapseSidebar = true;
     } else {
@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  sidebarFilter(selectedFilter) {
+  sidebarFilter(selectedFilter: any) {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.sideBarFilterClass.length; i++) {
       document.getElementById('main-app').classList.remove(this.sideBarFilterClass[i].colorSelect);
@@ -127,7 +127,7 @@ export class HomeComponent implements OnInit {
     document.getElementById(selectedFilter.sideBarSelect).classList.add('radius-circle');
   }
 
-  headerFilter(selectedFilter) {
+  headerFilter(selectedFilter: any) {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.headerFilterClass.length; i++) {
       document.getElementById('main-app').classList.remove(this.headerFilterClass[i].colorSelect);
@@ -139,7 +139,7 @@ export class HomeComponent implements OnInit {
     document.getElementById(selectedFilter.headerSelect).classList.add('radius-active');
   }
 
-  addClassOnBody(event) {
+  addClassOnBody(event: any) {
     const body = document.body;
     if (event.checked) {
       body.classList.add('dark-theme-active');
@@ -148,7 +148,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  changeRTL(isChecked) {
+  changeRTL(isChecked: any) {
     if (isChecked) {
       this.layout = 'rtl';
     } else {
@@ -156,7 +156,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  onActivate(e, scrollContainer) {
+  onActivate(e: any, scrollContainer: any) {
     scrollContainer.scrollTop = 0;
   }
 }

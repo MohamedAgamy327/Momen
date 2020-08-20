@@ -23,6 +23,7 @@ namespace Data.Context
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<VendorUser> VendorsUsers { get; set; }
+        public DbSet<VendorPicture> VendorPictures { get; set; }
 
 
     }

@@ -112,7 +112,7 @@ namespace API.Controllers
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
-            FileOperations.WriteFile("Vendor/License", model.Id, model.File);
+            FileOperations.WriteFile($"Vendors/{model.Id}/License", model.File);
 
             Vendor vendor = await _vendorRepository.GetAsync(model.Id).ConfigureAwait(true);
 
@@ -135,7 +135,7 @@ namespace API.Controllers
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
-            FileOperations.WriteFile("Vendor/Logo", model.Id, model.File);
+            FileOperations.WriteFile($"Vendors/{model.Id}/Logo", model.File);
             Vendor vendor = await _vendorRepository.GetAsync(model.Id).ConfigureAwait(true);
             vendor.LogoFileName = model.File.FileName;
             _vendorRepository.Edit(vendor);
@@ -154,7 +154,7 @@ namespace API.Controllers
             if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
                 return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
 
-            FileOperations.WriteFile("Vendor/PersonalId", model.Id, model.File);
+            FileOperations.WriteFile($"Vendors/{model.Id}/PersonalId", model.File);
 
             Vendor vendor = await _vendorRepository.GetAsync(model.Id).ConfigureAwait(true);
 
@@ -179,9 +179,7 @@ namespace API.Controllers
             _vendorRepository.Remove(vendor);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
 
-            FolderOperations.DeleteFolder("Vendor/License", id);
-            FolderOperations.DeleteFolder("Vendor/Logo", id);
-            FolderOperations.DeleteFolder("Vendor/PersonalId", id);
+            FolderOperations.DeleteFolder($"Vendors/{id}");
 
             VendorForGetDTO vendorDto = _mapper.Map<VendorForGetDTO>(vendor);
             return Ok(vendorDto);
