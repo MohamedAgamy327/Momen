@@ -10,7 +10,7 @@ import { AddSpacePipe } from '../core/custom-pipes';
 import { Ng5BreadcrumbModule } from 'ng5-breadcrumb';
 import { ToastrModule } from 'ngx-toastr';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-
+import { FileUploadModule } from 'ng2-file-upload';
 @NgModule({
   declarations: [
     AddSpacePipe,
@@ -28,7 +28,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     FlexLayoutModule,
     Ng5BreadcrumbModule.forRoot(),
     ToastrModule.forRoot(),
-    SlickCarouselModule
+    SlickCarouselModule,
+    FileUploadModule
   ],
   exports: [
     AddSpacePipe,
@@ -42,7 +43,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     FlexLayoutModule,
     Ng5BreadcrumbModule,
     ToastrModule,
-    SlickCarouselModule
+    SlickCarouselModule,
+    FileUploadModule
   ]
 })
 export class SharedModule { }

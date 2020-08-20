@@ -1,0 +1,22 @@
+<div class="popup-card-width">
+
+  <div fxLayout="row" fxLayoutAlign="space-between start">
+    <h2 mat-dialog-title>Vendor Picture</h2>
+    <mat-icon class="clickable" (click)="dialogRef.close()" matPrefix>close</mat-icon>
+  </div>
+
+  <mat-dialog-content>
+    <div>
+      <div>
+
+        <img [src]="environment.serverFile + data.path">
+        <br />
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="mrgn-b-xs pad-b-none" align="right">
+    <button type="button" mat-raised-button (click)="dialogRef.close()" color="primary">CLOSE</button>
+  </mat-dialog-actions>
+
+</div>

@@ -73,11 +73,12 @@
               <mat-icon matTooltip="Delete" aria-label="Delete" class="mat-icon-grey .table-icon">delete
               </mat-icon>
             </button>
-
-            <button mat-icon-button>
-              <mat-icon matTooltip="Pictures" aria-label="Pictures" class="mat-icon-grey .table-icon">photo_album
-              </mat-icon>
-            </button>
+            <a routerLink="/home/vendors/{{element.id}}/pictures">
+              <button mat-icon-button>
+                <mat-icon matTooltip="Pictures" aria-label="Pictures" class="mat-icon-grey .table-icon">photo_album
+                </mat-icon>
+              </button>
+            </a>
 
             <a routerLink="/home/vendors/{{element.id}}/users">
               <button mat-icon-button>
