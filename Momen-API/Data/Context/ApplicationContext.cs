@@ -19,12 +19,12 @@ namespace Data.Context
             modelBuilder.Seed();
         }
 
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Contract> Contracts { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<Contract> Contracts { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<VendorUser> VendorsUsers { get; set; }
-        public DbSet<VendorPicture> VendorPictures { get; set; }
-
+        public DbSet<VendorPicture> VendorsPictures { get; set; }
 
     }
 }

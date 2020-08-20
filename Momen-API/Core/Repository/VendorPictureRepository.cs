@@ -17,7 +17,7 @@ namespace Core.Repository
         }
         public async Task<VendorPicture> AddAsync(VendorPicture vendorPicture)
         {
-            await _context.VendorPictures.AddAsync(vendorPicture);
+            await _context.VendorsPictures.AddAsync(vendorPicture);
             return vendorPicture;
         }
         public VendorPicture Edit(VendorPicture vendorPicture)
@@ -27,11 +27,11 @@ namespace Core.Repository
         }
         public async Task<VendorPicture> GetAsync(int id)
         {
-            return await _context.VendorPictures.AsNoTracking().SingleOrDefaultAsync(s => s.Id == id);
+            return await _context.VendorsPictures.AsNoTracking().SingleOrDefaultAsync(s => s.Id == id);
         }
         public async Task<IEnumerable<VendorPicture>> GetByVendorAsync(int vendorId)
         {
-            return await _context.VendorPictures.OrderByDescending(o => o.Id).Where(w => w.VendorId == vendorId).ToListAsync();
+            return await _context.VendorsPictures.OrderByDescending(o => o.Id).Where(w => w.VendorId == vendorId).ToListAsync();
         }
         public void Remove(VendorPicture vendorPicture)
         {
@@ -39,7 +39,7 @@ namespace Core.Repository
         }
         public async Task<bool> IsExist(int id)
         {
-            return await _context.VendorPictures.AnyAsync(s => s.Id == id).ConfigureAwait(true);
+            return await _context.VendorsPictures.AnyAsync(s => s.Id == id).ConfigureAwait(true);
         }
     }
 }

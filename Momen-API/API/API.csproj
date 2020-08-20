@@ -40,7 +40,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Content\Contract\" />
 		<Folder Include="wwwroot\" />
 	</ItemGroup>
 

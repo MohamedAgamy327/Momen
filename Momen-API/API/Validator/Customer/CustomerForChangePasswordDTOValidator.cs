@@ -1,11 +1,11 @@
-﻿using API.DTO.VendorUser;
+﻿using API.DTO.Customer;
 using FluentValidation;
 
-namespace API.Validator.VendorUser
+namespace API.Validator.Customer
 {
-    public class VendorUserForChangePasswordDTOValidator : AbstractValidator<VendorUserForChangePasswordDTO>
+    public class CustomerForChangePasswordDTOValidator : AbstractValidator<CustomerForChangePasswordDTO>
     {
-        public VendorUserForChangePasswordDTOValidator()
+        public CustomerForChangePasswordDTOValidator()
         {
             RuleFor(x => x.Id)
                    .NotNull()
