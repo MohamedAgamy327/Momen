@@ -31,7 +31,7 @@ export class ContractEditDialogComponent {
       id: [this.data.id],
       name: [this.data.name, Validators.required],
       description: [this.data.description],
-      pdf: ['', Validators.required],
+      pdf: [''],
       pdfSource: ['']
     });
   }

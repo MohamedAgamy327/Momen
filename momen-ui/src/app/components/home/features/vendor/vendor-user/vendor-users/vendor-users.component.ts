@@ -130,9 +130,6 @@ export class VendorUsersComponent implements OnInit {
     this.vendorUserService.resetPassword(id).subscribe(
       (res: any) => {
         this.toastrService.success('Reset Password Successfully', 'Reset');
-        const index = this.vendorUsers.findIndex(f => f.id === res.id);
-        this.vendorUsers.splice(index, 1);
-        this.refreshData();
       });
   }
 

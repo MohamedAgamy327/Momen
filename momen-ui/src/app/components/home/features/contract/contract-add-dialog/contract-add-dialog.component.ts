@@ -14,7 +14,7 @@ import { ContractService } from 'src/app/core/services/api/contract.service';
 export class ContractAddDialogComponent {
 
   addForm: FormGroup;
-  @ViewChild('pdfInput') pdfInput;
+  @ViewChild('pdfInput') pdfInput: any;
 
   constructor(
     private fileValidationService: FileValidationService,

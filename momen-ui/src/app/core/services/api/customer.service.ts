@@ -51,7 +51,7 @@ export class CustomerService {
   }
 
   getAll(): Observable<Customer> {
-    return this.http.get<Customer>(`${environment.serverUrl}customers}`);
+    return this.http.get<Customer>(`${environment.serverUrl}customers`);
   }
 
 }

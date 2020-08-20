@@ -9,6 +9,7 @@ import { VendorUserService } from 'src/app/core/services';
   templateUrl: './vendor-user-add-dialog.component.html',
   styleUrls: ['./vendor-user-add-dialog.component.css']
 })
+
 export class VendorUserAddDialogComponent {
 
   addForm: FormGroup;
