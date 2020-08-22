@@ -14,10 +14,13 @@ export const MenuItemList: MenuItem[] = [
     icon: 'assignment'
   },
   {
-    state: 'home/vendors',
-    name: 'Vendor List',
-    type: 'link',
-    icon: 'admin_panel_settings'
+    name: 'Vendors',
+    type: 'sub',
+    icon: 'admin_panel_settings',
+    children: [
+      { state: 'home/vendors', name: 'Vendor List' },
+      { state: 'home/vendors/add', name: 'Add Vendor' }
+    ]
   },
   {
     state: 'home/customers',

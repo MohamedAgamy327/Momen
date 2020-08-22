@@ -7,7 +7,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <_PublishTargetUrl>D:\Projects\Me\Dr Wessam\Dr Wessam\Wessam</_PublishTargetUrl>
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAs8Sz9DU+EkeQKjgQ4b39EwAAAAACAAAAAAAQZgAAAAEAACAAAADuDKRypXHh3IXKHjvaCpbIghlgfM1RVjzv7AEFbWXMqAAAAAAOgAAAAAIAACAAAACauD4S442zWu0CuMgH6m62MT2TwxKlWWuF3C4C553zwyAAAAAVEMlere6YdLH6tDP1CSbFGHwzPke4rx9+hklEaeXNvUAAAABzOGcSnTwuaL2xxf98aKl8eVaqQdzqIFG5GmhncbWJ0AsZzYxjy2GUDVY2hCn8T1CH/H+6JNAR1DKuYPJvP01d</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAHUIGLrDXz0WmFJGSqN21/gAAAAACAAAAAAAQZgAAAAEAACAAAADccBBZiikKJ4unN35gJ6y1TVEBf2gxINDMu6ZSIQ3xsgAAAAAOgAAAAAIAACAAAADcjEYEAkp1bIsZDKHw1xW1y2QEq25SAU6O1LJem2AzXSAAAADUmj0xEg5VccQiWTyASRBsCgyGvsY3FvEzqHut/6cJ6EAAAAB8fhubjnEkV2z1ej5eW8rd8aWUuuDbcMeOpOyuj1ifGWobl/EVrtzj58a1b/jNT2oCzLgeTqqyeDtIarDzQxL7</EncryptedPassword>
   </PropertyGroup>
   <ItemGroup>
     <DestinationConnectionStrings Include="DefaultConnection">

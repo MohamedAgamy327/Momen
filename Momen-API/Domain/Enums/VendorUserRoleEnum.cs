@@ -2,6 +2,6 @@
 {
     public enum VendorUserRoleEnum
     {
-        Admin, Editor
+        GroupAdmin, BranchAdmin, BranchEditor
     }
 }

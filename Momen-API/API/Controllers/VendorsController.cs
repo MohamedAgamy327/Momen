@@ -35,12 +35,6 @@ namespace API.Controllers
             if (await _vendorRepository.IsExist(model.Name, model.CategoryId).ConfigureAwait(true))
                 return Conflict(new ApiResponse(409, StringConsts.EXISTED));
 
-            if (await _vendorRepository.IsExistByPhone(model.Phone).ConfigureAwait(true))
-                return Conflict(new ApiResponse(409, StringConcatenates.Exist("Phone", model.Phone)));
-
-            if (await _vendorRepository.IsExistByEmail(model.Email).ConfigureAwait(true))
-                return Conflict(new ApiResponse(409, StringConcatenates.Exist("Email", model.Email)));
-
             if (await _vendorUserRepository.IsExistByPhone(model.VendorUser.Phone).ConfigureAwait(true))
                 return Conflict(new ApiResponse(409, StringConcatenates.Exist("Phone", model.VendorUser.Phone)));
 
@@ -61,7 +55,6 @@ namespace API.Controllers
             await _vendorRepository.AddAsync(vendor).ConfigureAwait(true);
             await _unitOfWork.CompleteAsync().ConfigureAwait(true);
 
-            Email.Send("Momen", model.Email, "welcome", "welcome");
             Email.Send("Momen", vendorUser.Email, "password", password);
 
             vendor = await _vendorRepository.GetAsync(vendor.Id).ConfigureAwait(true);
@@ -81,12 +74,6 @@ namespace API.Controllers
 
             if (await _vendorRepository.IsExist(model.Id, model.Name, model.CategoryId).ConfigureAwait(true))
                 return Conflict(new ApiResponse(409, StringConsts.EXISTED));
-
-            if (await _vendorRepository.IsExistByPhone(id, model.Phone).ConfigureAwait(true))
-                return Conflict(new ApiResponse(409, StringConcatenates.Exist("Phone", model.Phone)));
-
-            if (await _vendorRepository.IsExistByEmail(id, model.Email).ConfigureAwait(true))
-                return Conflict(new ApiResponse(409, StringConcatenates.Exist("Email", model.Email)));
 
             Vendor oldVendor = await _vendorRepository.GetAsync(id).ConfigureAwait(true);
             Vendor vendor = _mapper.Map<Vendor>(model);

@@ -13,10 +13,6 @@ namespace Core.IRepository
         Task<IEnumerable<Vendor>> GetAsync();
         Task<bool> IsExist(int id);
         Task<bool> IsExistByCategory(int categoryId);
-        Task<bool> IsExistByEmail(string email);
-        Task<bool> IsExistByPhone(string phone);
-        Task<bool> IsExistByEmail(int id, string email);
-        Task<bool> IsExistByPhone(int id, string phone);
         Task<bool> IsExist(string name, int categoryId);
         Task<bool> IsExist(int id, string name, int categoryId);
     }
