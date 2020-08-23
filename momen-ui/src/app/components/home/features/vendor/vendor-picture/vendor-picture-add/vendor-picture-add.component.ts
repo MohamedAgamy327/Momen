@@ -43,9 +43,8 @@ export class VendorPictureAddComponent implements OnInit {
       return;
     } else {
       const fileList: any = this.uploader.queue.map(m => m.file.rawFile);
-      // tslint:disable-next-line: prefer-for-of
-      for (let x = 0; x < fileList.length; x++) {
-        this.vendorPictureFormData.append('pictures', fileList[x], fileList[x].name);
+      for (const file of fileList.length) {
+        this.vendorPictureFormData.append('pictures', file, file.name);
       }
       this.postVendorPicture(this.route.snapshot.params.vendorId);
     }

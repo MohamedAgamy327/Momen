@@ -79,9 +79,7 @@ export class HomeComponent implements OnInit {
       this.coreService.sidenavMode = 'over';
       this.coreService.sidenavOpen = false;
       const mainDiv = document.getElementsByClassName('app');
-
-      // tslint:disable-next-line: prefer-for-of
-      for (let i = 0; i < mainDiv.length; i++) {
+      for (const i in mainDiv) {
         if (!(mainDiv[i].classList.contains('sidebar-overlay'))) {
           if (document.getElementById('main-app')) {
             document.getElementById('main-app').className += ' sidebar-overlay';
@@ -94,8 +92,7 @@ export class HomeComponent implements OnInit {
       this.coreService.sidenavMode = 'side';
       this.coreService.sidenavOpen = true;
       const mainDiv = document.getElementsByClassName('app');
-      // tslint:disable-next-line: prefer-for-of
-      for (let i = 0; i < mainDiv.length; i++) {
+      for (const i in mainDiv) {
         if (mainDiv[i].classList.contains('sidebar-overlay')) {
           document.getElementById('main-app').classList.remove('sidebar-overlay');
         }
@@ -116,11 +113,10 @@ export class HomeComponent implements OnInit {
   }
 
   sidebarFilter(selectedFilter: any) {
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.sideBarFilterClass.length; i++) {
-      document.getElementById('main-app').classList.remove(this.sideBarFilterClass[i].colorSelect);
-      if (this.sideBarFilterClass[i].colorSelect === selectedFilter.colorSelect) {
-        document.getElementById('main-app').classList.add(this.sideBarFilterClass[i].colorSelect);
+    for (const sideClass of this.sideBarFilterClass.length) {
+      document.getElementById('main-app').classList.remove(sideClass.colorSelect);
+      if (sideClass.colorSelect === selectedFilter.colorSelect) {
+        document.getElementById('main-app').classList.add(sideClass.colorSelect);
       }
     }
     document.querySelector('.radius-circle').classList.remove('radius-circle');
@@ -128,11 +124,10 @@ export class HomeComponent implements OnInit {
   }
 
   headerFilter(selectedFilter: any) {
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < this.headerFilterClass.length; i++) {
-      document.getElementById('main-app').classList.remove(this.headerFilterClass[i].colorSelect);
-      if (this.headerFilterClass[i].colorSelect === selectedFilter.colorSelect) {
-        document.getElementById('main-app').classList.add(this.headerFilterClass[i].colorSelect);
+    for (const headerClass of this.headerFilterClass.length) {
+      document.getElementById('main-app').classList.remove(headerClass.colorSelect);
+      if (headerClass.colorSelect === selectedFilter.colorSelect) {
+        document.getElementById('main-app').classList.add(headerClass.colorSelect);
       }
     }
     document.querySelector('.radius-active').classList.remove('radius-active');
