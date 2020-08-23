@@ -22,8 +22,16 @@ export class VendorService {
     return this.http.put<Vendor>(`${environment.serverUrl}vendors/${id}`, model);
   }
 
-  uploadFile(id: number, model: any): Observable<any> {
-    return this.http.patch(`${environment.serverUrl}vendors/${id}/file`, model);
+  uploadLogo(id: number, model: any): Observable<any> {
+    return this.http.patch(`${environment.serverUrl}vendors/${id}/logofile`, model);
+  }
+
+  uploadLicense(id: number, model: any): Observable<any> {
+    return this.http.patch(`${environment.serverUrl}vendors/${id}/licensefile`, model);
+  }
+
+  uploadPersonalId(id: number, model: any): Observable<any> {
+    return this.http.patch(`${environment.serverUrl}vendors/${id}/personalIdfile`, model);
   }
 
   delete(id: number): Observable<any> {

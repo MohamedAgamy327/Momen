@@ -1,0 +1,276 @@
+<div fxLayout="row wrap" fxLayoutAlign=" start" class="gene-form-wizard">
+  <mat-card fxFlex="100%">
+    <div class="gene-card-title">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div fxLayout="column">
+          <h4>Add New Patient</h4>
+        </div>
+        <span fxFlex></span>
+      </div>
+      <mat-divider></mat-divider>
+    </div>
+    <div class="gene-card-content">
+
+      <mat-horizontal-stepper #stepper>
+
+        <mat-step label="Vendor" state="vendor" [stepControl]="vendorForm">
+
+          <form autocomplete="off" [formGroup]="vendorForm">
+
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+
+                <mat-form-field class="full-wid mrgn-b-xs" appearance="outline">
+                  <mat-label>Corporation Name</mat-label>
+                  <input matInput placeholder="Corporation Name" formControlName="name">
+                  <mat-icon matSuffix>apartment</mat-icon>
+                  <mat-error *ngIf="vendorErrorHandling('name', 'required')">
+                    This field is required
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+
+              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+
+                <mat-form-field class="full-wid mrgn-b-xs" appearance="outline">
+                  <mat-label>Category</mat-label>
+                  <mat-select formControlName="categoryId" placeholder="Categories" #singleSelect>
+                    <mat-option>
+                      <ngx-mat-select-search [formControl]="categoryMultiFilterCtrl" placeholderLabel="Find category..."
+                        noEntriesFoundLabel="'No matching Category found'">
+                      </ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let category of filteredCategoriesMulti | async" [value]="category.id">
+                      {{category.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="vendorErrorHandling('categoryId', 'required')">
+                    This field is required
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+
+            </div>
+
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+
+                <mat-form-field class="full-wid mrgn-b-xs" appearance="outline">
+                  <mat-label>Count Of Branches</mat-label>
+                  <input type="number" matInput placeholder="Count Of Branches" formControlName="branchesCount">
+                  <mat-error *ngIf="vendorErrorHandling('branchesCount', 'required')">
+                    This field is required
+                  </mat-error>
+                  <mat-error *ngIf="vendorErrorHandling('branchesCount', 'min')">
+                    number is must be greater than 0
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+
+              <div fxFlex.gt-sm="49" fxFlex.gt-xs="49" fxFlex="100" fxFlex.gt-md="49">
+                <mat-form-field class="full-wid mrgn-b-xs" appearance="outline">
+                  <mat-label>Description</mat-label>
+                  <input multiple matInput type="text" placeholder="Description" formControlName="description">
+                  <mat-icon matSuffix>description</mat-icon>
+                  <mat-error *ngIf="vendorErrorHandling('description', 'required')">
+                    This field is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+            </div>
+
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+              <div fxFlex.gt-sm="29" fxFlex.gt-xs="29" fxFlex="100" fxFlex.gt-md="29">
+
+                <mat-form-field class="full-wid mrgn-b-sm" appearance="outline">
+                  <mat-label>Logo File</mat-label>
+                  <ngx-mat-file-input [disabled]="!logoInput.empty" (change)="logoInputChange($event)" accept='image/*'
+                    #logoInput formControlName="logo" placeholder="Logo File">
+                  </ngx-mat-file-input>
+                  <mat-icon *ngIf="logoInput.empty" matSuffix>folder</mat-icon>
+                  <button mat-icon-button matSuffix *ngIf="!logoInput.empty" (click)="clearLogoInput($event)">
+                    <mat-icon>clear</mat-icon>
+                  </button>
+                  <mat-error *ngIf="vendorErrorHandling('logo', 'required')">
+                    This field is required
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+
+              <div fxFlex.gt-sm="69" fxFlex.gt-xs="69" fxFlex="100" fxFlex.gt-md="69">
+
+                <mat-form-field class="full-wid mrgn-b-sm" appearance="outline">
+                  <mat-label>Sample product images </mat-label>
+                  <ngx-mat-file-input multiple [disabled]="!picturesInput.empty" (change)="picturesInputChange($event)"
+                    accept='image/*' #picturesInput formControlName="pictures" placeholder="Sample product images ">
+                  </ngx-mat-file-input>
+                  <mat-icon *ngIf="picturesInput.empty" matSuffix>folder</mat-icon>
+                  <button mat-icon-button matSuffix *ngIf="!picturesInput.empty" (click)="clearPicturesInput($event)">
+                    <mat-icon>clear</mat-icon>
+                  </button>
+                  <mat-error *ngIf="vendorErrorHandling('pictures', 'required')">
+                    This field is required
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+
+            </div>
+
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+              <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
+
+                <mat-form-field class="full-wid mrgn-b-xs" appearance="outline">
+                  <mat-label>Facebook Link</mat-label>
+                  <input matInput type="text" placeholder="Facebook" formControlName="facebook">
+                  <mat-icon matSuffix>facebook</mat-icon>
+                </mat-form-field>
+              </div>
+              <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
+                <mat-form-field class="full-wid mrgn-b-xs" appearance="outline">
+                  <mat-label>Twitter Link</mat-label>
+                  <input matInput type="text" placeholder="Twitter" formControlName="twitter">
+                  <mat-icon matSuffix> <span class="iconify" data-icon="ant-design:twitter-circle-filled"
+                      data-inline="false"></span>
+                  </mat-icon>
+                </mat-form-field>
+              </div>
+              <div fxFlex.gt-sm="32" fxFlex.gt-xs="32" fxFlex="100" fxFlex.gt-md="32">
+                <mat-form-field class="full-wid mrgn-b-xs" appearance="outline">
+                  <mat-label>Instgram Link</mat-label>
+                  <input matInput type="text" placeholder="Instgram" formControlName="instgram">
+                  <mat-icon matSuffix> <span class="iconify" data-icon="mdi-instagram" data-inline="false"></span>
+                  </mat-icon>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start">
+              <button mat-button mat-raised-button matStepperNext type="button" color="primary">Next</button>
+            </div>
+
+          </form>
+        </mat-step>
+
+        <mat-step label="User" state="user" [stepControl]="userForm">
+
+          <form autocomplete="off" [formGroup]="userForm">
+
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+              <mat-form-field class="full-wid mrgn-b-xs" appearance="outline">
+                <mat-label> Name</mat-label>
+                <input matInput placeholder="Name" formControlName="name">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                <mat-error *ngIf="userErrorHandling('name', 'required')">
+                  This field is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="full-wid mrgn-b-xs" appearance="outline">
+                <mat-label> Email</mat-label>
+                <input matInput placeholder="Email" formControlName="email">
+                <mat-icon matSuffix>email</mat-icon>
+                <mat-error *ngIf="userErrorHandling('email', 'required')">
+                  This field is required
+                </mat-error>
+                <mat-error *ngIf="userErrorHandling('email', 'email')">
+                  Email invalid format
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="mrgn-b-xs full-wid" appearance="outline">
+                <mat-label>Phone</mat-label>
+                <input matInput formControlName="phone" type="text" placeholder="Phone">
+                <mat-icon matSuffix>phone</mat-icon>
+                <mat-error *ngIf="userErrorHandling('phone', 'required')">
+                  This field is required
+                </mat-error>
+                <mat-error *ngIf="userErrorHandling('phone', 'pattern')">
+                  Number Only
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start">
+              <button mat-button type="button" mat-raised-button matStepperPrevious>Back</button>
+              <button mat-button mat-raised-button matStepperNext type="button" color="primary">Next</button>
+            </div>
+
+          </form>
+
+        </mat-step>
+
+        <mat-step label="License" state="license" [stepControl]="attachedForm">
+
+          <form autocomplete="off" [formGroup]="attachedForm">
+
+            <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+              <mat-form-field class="full-wid mrgn-b-sm" appearance="outline">
+                <mat-label>PersonalId File</mat-label>
+                <ngx-mat-file-input [disabled]="!personalIdInput.empty" (change)="personalIdInputChange($event)"
+                  accept='image/*' #personalIdInput formControlName="personalId" placeholder="PersonalId File">
+                </ngx-mat-file-input>
+                <mat-icon *ngIf="personalIdInput.empty" matSuffix>folder</mat-icon>
+                <button mat-icon-button matSuffix *ngIf="!personalIdInput.empty" (click)="clearPersonalIdInput($event)">
+                  <mat-icon>clear</mat-icon>
+                </button>
+                <mat-error *ngIf="attachedErrorHandling('personalId', 'required')">
+                  This field is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="full-wid mrgn-b-sm" appearance="outline">
+                <mat-label>License File</mat-label>
+                <ngx-mat-file-input [disabled]="!licenseInput.empty" (change)="licenseInputChange($event)"
+                  accept='image/*' #licenseInput formControlName="license" placeholder="License File">
+                </ngx-mat-file-input>
+                <mat-icon *ngIf="licenseInput.empty" matSuffix>folder</mat-icon>
+                <button mat-icon-button matSuffix *ngIf="!licenseInput.empty" (click)="clearLicenseInput($event)">
+                  <mat-icon>clear</mat-icon>
+                </button>
+                <mat-error *ngIf="attachedErrorHandling('license', 'required')">
+                  This field is required
+                </mat-error>
+              </mat-form-field>
+
+
+            </div>
+
+
+
+            <div fxLayout="row" fxLayoutAlign="start">
+              <button mat-button type="button" mat-raised-button matStepperPrevious>Back</button>
+              <button mat-button mat-raised-button (click)="save()" type="submit"
+                [disabled]="!vendorForm.valid || !userForm.valid || !attachedForm.valid" color="primary">Save</button>
+            </div>
+
+          </form>
+
+        </mat-step>
+
+        <!-- Icon overrides. -->
+        <ng-template matStepperIcon="vendor">
+          <mat-icon>business</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="user">
+          <mat-icon>account_circle</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="license">
+          <mat-icon>assignment</mat-icon>
+        </ng-template>
+      </mat-horizontal-stepper>
+    </div>
+
+  </mat-card>
+</div>
