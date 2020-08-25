@@ -30,7 +30,7 @@ export class CustomerAddDialogComponent {
     this.addForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       picture: ['', Validators.required],
       pictureSource: ['']
     });

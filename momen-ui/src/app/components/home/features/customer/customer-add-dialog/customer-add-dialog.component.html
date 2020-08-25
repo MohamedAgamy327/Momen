@@ -36,6 +36,9 @@
           <mat-error *ngIf="errorHandling('phone', 'required')">
             This field is required
           </mat-error>
+          <mat-error *ngIf="errorHandling('phone', 'pattern')">
+            Number Only
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-wid mrgn-b-sm" appearance="outline">
