@@ -28,7 +28,7 @@ export class VendorUserAddDialogComponent {
     this.addForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       role: ['Admin', Validators.required],
       vendorId: [this.data]
     });

@@ -28,7 +28,7 @@ export class VendorUserEditDialogComponent {
       id: [this.data.id],
       name: [this.data.name, Validators.required],
       email: [this.data.email, [Validators.required, Validators.email]],
-      phone: [this.data.phone, Validators.required],
+      phone: [this.data.phone, [Validators.required, Validators.pattern('^[0-9]*$')]],
       role: [this.data.role, Validators.required]
     });
   }
