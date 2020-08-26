@@ -41,7 +41,7 @@ export class ContractAddDialogComponent {
     return this.addForm.controls[control].hasError(error);
   }
 
-  uploadPdf(event: any) {
+  pdfInputChange(event: any) {
     if (this.fileValidationService.checkInvalidPDF(event.target.files[0])) {
       this.addForm.patchValue({ pdf: '' });
       this.toastrService.error('Invalid PDF', 'Error');
@@ -59,15 +59,15 @@ export class ContractAddDialogComponent {
     this.contractService.create(this.addForm.value).subscribe(
       (res: any) => {
         this.toastrService.success('Added Successfully', 'Add');
-        this.uploadFile(res.id);
+        this.uploadPdf(res.id);
       });
   }
 
-  uploadFile(id: any) {
+  uploadPdf(id: any) {
     const formData = new FormData();
     formData.append('id', id);
     formData.append('pdf', this.addForm.value.pdfSource, this.addForm.value.pdfSource.name);
-    this.contractService.uploadFile(Number(id), formData).subscribe(
+    this.contractService.uploadPdf(Number(id), formData).subscribe(
       (res: any) => {
         this.toastrService.success('PDF File uploaded successfully', 'upload');
         this.dialogRef.close(res);

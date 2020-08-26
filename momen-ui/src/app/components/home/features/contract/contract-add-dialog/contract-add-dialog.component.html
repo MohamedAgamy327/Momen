@@ -26,7 +26,7 @@
 
         <mat-form-field class="full-wid mrgn-b-sm" appearance="outline">
           <mat-label>PDF File</mat-label>
-          <ngx-mat-file-input [disabled]="!pdfInput.empty" (change)="uploadPdf($event)" accept='application/pdf'
+          <ngx-mat-file-input [disabled]="!pdfInput.empty" (change)="pdfInputChange($event)" accept='application/pdf'
             #pdfInput formControlName="pdf" placeholder="PDF File"></ngx-mat-file-input>
           <mat-icon *ngIf="pdfInput.empty" matSuffix>folder</mat-icon>
           <button mat-icon-button matSuffix *ngIf="!pdfInput.empty" (click)="clearPdfInput($event)">

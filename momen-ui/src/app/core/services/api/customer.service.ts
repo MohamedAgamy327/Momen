@@ -22,7 +22,7 @@ export class CustomerService {
     return this.http.put<Customer>(`${environment.serverUrl}customers/${id}`, model);
   }
 
-  uploadFile(id: number, model: any): Observable<any> {
+  uploadPicture(id: number, model: any): Observable<any> {
     return this.http.patch(`${environment.serverUrl}customers/${id}/picture`, model);
   }
 

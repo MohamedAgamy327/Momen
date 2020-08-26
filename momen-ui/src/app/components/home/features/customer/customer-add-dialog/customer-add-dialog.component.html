@@ -43,7 +43,7 @@
 
         <mat-form-field class="full-wid mrgn-b-sm" appearance="outline">
           <mat-label>Picture File</mat-label>
-          <ngx-mat-file-input [disabled]="!pictureInput.empty" (change)="uploadPicture($event)" accept='image/*'
+          <ngx-mat-file-input [disabled]="!pictureInput.empty" (change)="pictureInputChange($event)" accept='image/*'
             #pictureInput formControlName="picture" placeholder="Picture File">
           </ngx-mat-file-input>
           <mat-icon *ngIf="pictureInput.empty" matSuffix>folder</mat-icon>

@@ -36,7 +36,7 @@ export class VendorPictureAddComponent implements OnInit {
     this.hasAnotherDropZoneOver = e;
   }
 
-  uploadVendorPicture() {
+  picturesInputChange() {
     this.vendorPictureFormData = new FormData();
     if (this.fileValidationService.checkInvalidImages(this.uploader.queue.map(m => m.file.rawFile))) {
       this.toastrService.error('Invalid images', 'Error');
@@ -46,11 +46,11 @@ export class VendorPictureAddComponent implements OnInit {
       for (const file of fileList.length) {
         this.vendorPictureFormData.append('pictures', file, file.name);
       }
-      this.postVendorPicture(this.route.snapshot.params.vendorId);
+      this.uploadVendorPictures(this.route.snapshot.params.vendorId);
     }
   }
 
-  postVendorPicture(vendorId: number) {
+  uploadVendorPictures(vendorId: number) {
     this.vendorPictureFormData.append('vendorId', String(vendorId));
     this.vendorPictureService.create(this.vendorPictureFormData).subscribe(
       (res: any) => {

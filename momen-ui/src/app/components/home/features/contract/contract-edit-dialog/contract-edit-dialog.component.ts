@@ -40,7 +40,7 @@ export class ContractEditDialogComponent {
     return this.editForm.controls[control].hasError(error);
   }
 
-  uploadPdf(event: any) {
+  pdfInputChange(event: any) {
     if (this.fileValidationService.checkInvalidPDF(event.target.files[0])) {
       this.editForm.patchValue({ pdf: '' });
       this.toastrService.error('Invalid PDF', 'Error');
@@ -58,7 +58,7 @@ export class ContractEditDialogComponent {
     this.contractService.edit(this.data.id, this.editForm.value).subscribe(
       (res: any) => {
         if (this.editForm.value.pdf) {
-          this.uploadFile(res.id);
+          this.uploadPdf(res.id);
         } else {
           this.dialogRef.close(res);
         }
@@ -66,11 +66,11 @@ export class ContractEditDialogComponent {
       });
   }
 
-  uploadFile(id: any) {
+  uploadPdf(id: any) {
     const formData = new FormData();
     formData.append('id', id);
     formData.append('pdf', this.editForm.value.pdfSource, this.editForm.value.pdfSource.name);
-    this.contractService.uploadFile(id, formData).subscribe(
+    this.contractService.uploadPdf(id, formData).subscribe(
       (res: any) => {
         this.toastrService.success('PDF File Uploaded Successfully', 'Upload');
         this.dialogRef.close(res);

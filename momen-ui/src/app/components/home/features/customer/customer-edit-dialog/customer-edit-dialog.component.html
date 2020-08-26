@@ -44,7 +44,7 @@
 
         <mat-form-field class="full-wid mrgn-b-sm" appearance="outline">
           <mat-label>Choose Picture if you want to change current profile picture</mat-label>
-          <ngx-mat-file-input [disabled]="!pictureInput.empty" (change)="uploadPicture($event)" accept='image/*'
+          <ngx-mat-file-input [disabled]="!pictureInput.empty" (change)="pictureInputChange($event)" accept='image/*'
             #pictureInput formControlName="picture" placeholder="PDF File">
           </ngx-mat-file-input>
           <mat-icon *ngIf="pictureInput.empty" matSuffix>folder</mat-icon>

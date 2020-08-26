@@ -40,7 +40,7 @@ export class CustomerAddDialogComponent {
     return this.addForm.controls[control].hasError(error);
   }
 
-  uploadPicture(event: any) {
+  pictureInputChange(event: any) {
     if (this.fileValidationService.checkInvalidImage(event.target.files[0])) {
       this.addForm.patchValue({ picture: '' });
       this.toastrService.error('Invalid Picture', 'Error');
@@ -58,15 +58,15 @@ export class CustomerAddDialogComponent {
     this.customerService.create(this.addForm.value).subscribe(
       (res: any) => {
         this.toastrService.success('Added Successfully', 'Add');
-        this.uploadFile(res.id);
+        this.uploadPicture(res.id);
       });
   }
 
-  uploadFile(id: any) {
+  uploadPicture(id: any) {
     const formData = new FormData();
     formData.append('id', id);
     formData.append('picture', this.addForm.value.pictureSource, this.addForm.value.pictureSource.name);
-    this.customerService.uploadFile(Number(id), formData).subscribe(
+    this.customerService.uploadPicture(Number(id), formData).subscribe(
       (res: any) => {
         this.toastrService.success('PDF File uploaded successfully', 'upload');
         this.dialogRef.close(res);

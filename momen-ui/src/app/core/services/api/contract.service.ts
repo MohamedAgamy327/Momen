@@ -22,7 +22,7 @@ export class ContractService {
     return this.http.put<Contract>(`${environment.serverUrl}contracts/${id}`, model);
   }
 
-  uploadFile(id: number, model: any): Observable<any> {
+  uploadPdf(id: number, model: any): Observable<any> {
     return this.http.patch(`${environment.serverUrl}contracts/${id}/pdf`, model);
   }
 

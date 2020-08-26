@@ -41,7 +41,7 @@ export class CustomerEditDialogComponent {
     return this.editForm.controls[control].hasError(error);
   }
 
-  uploadPicture(event: any) {
+  pictureInputChange(event: any) {
     if (this.fileValidationService.checkInvalidImage(event.target.files[0])) {
       this.editForm.patchValue({ picture: '' });
       this.toastrService.error('Invalid Picture', 'Error');
@@ -60,18 +60,18 @@ export class CustomerEditDialogComponent {
       (res: any) => {
         this.toastrService.success('Edited Successfully', 'Edit');
         if (this.editForm.value.picture) {
-          this.uploadFile(res.id);
+          this.uploadPicture(res.id);
         } else {
           this.dialogRef.close(res);
         }
       });
   }
 
-  uploadFile(id: any) {
+  uploadPicture(id: any) {
     const formData = new FormData();
     formData.append('id', id);
     formData.append('picture', this.editForm.value.pictureSource, this.editForm.value.pictureSource.name);
-    this.customerService.uploadFile(Number(id), formData).subscribe(
+    this.customerService.uploadPicture(Number(id), formData).subscribe(
       (res: any) => {
         this.toastrService.success('PDF File uploaded successfully', 'upload');
         this.dialogRef.close(res);
