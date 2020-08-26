@@ -19,7 +19,8 @@ namespace API.Validator.VendorUser
 
             RuleFor(x => x.Phone)
                    .NotNull()
-                   .NotEmpty();
+                   .NotEmpty()
+                   .Matches(@"^\d*$");
 
             RuleFor(x => x.VendorId)
                    .NotNull()

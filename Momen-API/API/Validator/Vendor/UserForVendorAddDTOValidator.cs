@@ -18,7 +18,8 @@ namespace API.Validator.Vendor
 
             RuleFor(x => x.Phone)
                    .NotNull()
-                   .NotEmpty();
+                   .NotEmpty()
+                   .Matches(@"^\d*$"); ;
         }
     }
 }

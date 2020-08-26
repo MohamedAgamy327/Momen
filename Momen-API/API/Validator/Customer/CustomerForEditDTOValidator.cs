@@ -22,7 +22,8 @@ namespace API.Validator.Customer
 
             RuleFor(x => x.Phone)
                    .NotNull()
-                   .NotEmpty();
+                   .NotEmpty()
+                   .Matches(@"^\d*$"); 
 
         }
     }
