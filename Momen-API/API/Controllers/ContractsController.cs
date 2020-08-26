@@ -66,9 +66,9 @@ namespace API.Controllers
             return Ok(contractDto);
         }
 
-        [HttpPatch("{id:int}/file")]
+        [HttpPatch("{id:int}/pdf")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> UploadFile(int id, [FromForm] ContractForFileDTO model)
+        public async Task<ActionResult> UploadPdf(int id, [FromForm] ContractForFileDTO model)
         {
             if (id != model.Id)
                 return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));

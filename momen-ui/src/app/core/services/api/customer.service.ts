@@ -23,7 +23,7 @@ export class CustomerService {
   }
 
   uploadFile(id: number, model: any): Observable<any> {
-    return this.http.patch(`${environment.serverUrl}customers/${id}/file`, model);
+    return this.http.patch(`${environment.serverUrl}customers/${id}/picture`, model);
   }
 
   changePassword(id: number, model: any): Observable<any> {

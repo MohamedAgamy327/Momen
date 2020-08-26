@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.DTO.Customer
 {
-    public class CustomerForProfilePictureDTO
+    public class CustomerForPictureDTO
     {
         [FromForm(Name = "Id")]
         public int Id { get; set; }

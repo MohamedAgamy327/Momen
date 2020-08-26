@@ -96,9 +96,9 @@ namespace API.Controllers
             return Ok(customerDto);
         }
 
-        [HttpPatch("{id:int}/file")]
+        [HttpPatch("{id:int}/picture")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> UploadFile(int id, [FromForm] CustomerForProfilePictureDTO model)
+        public async Task<ActionResult> UploadPicture(int id, [FromForm] CustomerForPictureDTO model)
         {
             if (id != model.Id)
                 return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));

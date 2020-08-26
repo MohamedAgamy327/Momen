@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace API.Validator.Customer
 {
-    public class CustomerForProfilePictureDTOValidator : AbstractValidator<CustomerForProfilePictureDTO>
+    public class CustomerForPictureDTOValidator : AbstractValidator<CustomerForPictureDTO>
     {
-        public CustomerForProfilePictureDTOValidator()
+        public CustomerForPictureDTOValidator()
         {
             RuleFor(x => x.Id)
                    .NotNull()

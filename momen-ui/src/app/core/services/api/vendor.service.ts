@@ -23,15 +23,15 @@ export class VendorService {
   }
 
   uploadLogo(id: number, model: any): Observable<any> {
-    return this.http.patch(`${environment.serverUrl}vendors/${id}/logofile`, model);
+    return this.http.patch(`${environment.serverUrl}vendors/${id}/logo`, model);
   }
 
   uploadLicense(id: number, model: any): Observable<any> {
-    return this.http.patch(`${environment.serverUrl}vendors/${id}/licensefile`, model);
+    return this.http.patch(`${environment.serverUrl}vendors/${id}/license`, model);
   }
 
   uploadPersonalId(id: number, model: any): Observable<any> {
-    return this.http.patch(`${environment.serverUrl}vendors/${id}/personalIdfile`, model);
+    return this.http.patch(`${environment.serverUrl}vendors/${id}/personalId`, model);
   }
 
   delete(id: number): Observable<any> {

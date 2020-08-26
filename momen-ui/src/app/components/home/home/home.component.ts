@@ -92,7 +92,8 @@ export class HomeComponent implements OnInit {
       this.coreService.sidenavMode = 'side';
       this.coreService.sidenavOpen = true;
       const mainDiv = document.getElementsByClassName('app');
-      for (const i in mainDiv) {
+      // tslint:disable-next-line: prefer-for-of
+      for (let i = 0; i < mainDiv.length; i++) {
         if (mainDiv[i].classList.contains('sidebar-overlay')) {
           document.getElementById('main-app').classList.remove('sidebar-overlay');
         }

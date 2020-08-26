@@ -89,9 +89,9 @@ namespace API.Controllers
             return Ok(vendorDto);
         }
 
-        [HttpPatch("{id:int}/licensefile")]
+        [HttpPatch("{id:int}/license")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> UploadLicenseFile(int id, [FromForm] VendorForLicenseDTO model)
+        public async Task<ActionResult> UploadLicense(int id, [FromForm] VendorForLicenseDTO model)
         {
             if (id != model.Id)
                 return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
@@ -112,9 +112,9 @@ namespace API.Controllers
             return Ok(vendorDto);
         }
 
-        [HttpPatch("{id:int}/logofile")]
+        [HttpPatch("{id:int}/logo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> UploadLogoFile(int id, [FromForm] VendorForLogoDTO model)
+        public async Task<ActionResult> UploadLogo(int id, [FromForm] VendorForLogoDTO model)
         {
             if (id != model.Id)
                 return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
@@ -133,7 +133,7 @@ namespace API.Controllers
 
         [HttpPatch("{id:int}/personalidfile")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult> UploadPersonalIdFile(int id, [FromForm] VendorForPersonalIdDTO model)
+        public async Task<ActionResult> UploadPersonalId(int id, [FromForm] VendorForPersonalIdDTO model)
         {
             if (id != model.Id)
                 return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
