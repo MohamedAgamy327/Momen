@@ -3,7 +3,7 @@
     <div class="gene-card-title">
       <div fxLayout="row" fxLayoutAlign="start center">
         <div fxLayout="column">
-          <h4>Add New Patient</h4>
+          <h4>Add New Vendor</h4>
         </div>
         <span fxFlex></span>
       </div>
@@ -13,7 +13,7 @@
 
       <mat-horizontal-stepper #stepper>
 
-        <mat-step label="Vendor" state="vendor" [stepControl]="vendorForm">
+        <mat-step label="Corporation" state="vendor" [stepControl]="vendorForm">
 
           <form autocomplete="off" [formGroup]="vendorForm">
 
@@ -160,7 +160,7 @@
           </form>
         </mat-step>
 
-        <mat-step label="User" state="user" [stepControl]="userForm">
+        <mat-step label="Admin Info" state="user" [stepControl]="userForm">
 
           <form autocomplete="off" [formGroup]="userForm">
 
@@ -203,14 +203,15 @@
 
             <div fxLayout="row" fxLayoutAlign="start">
               <button mat-button type="button" mat-raised-button matStepperPrevious>Back</button>
-              <button mat-button mat-raised-button matStepperNext type="button" color="primary">Next</button>
+              <button mat-button mat-raised-button (click)="save()" type="submit"
+                [disabled]="!vendorForm.valid || !userForm.valid" color="primary">Save</button>
             </div>
 
           </form>
 
         </mat-step>
 
-        <mat-step label="License" state="license" [stepControl]="attachedForm">
+        <!--   <mat-step label="License" state="license" [stepControl]="attachedForm">
 
           <form autocomplete="off" [formGroup]="attachedForm">
 
@@ -257,7 +258,7 @@
 
           </form>
 
-        </mat-step>
+        </mat-step> -->
 
         <!-- Icon overrides. -->
         <ng-template matStepperIcon="vendor">
@@ -266,9 +267,9 @@
         <ng-template matStepperIcon="user">
           <mat-icon>account_circle</mat-icon>
         </ng-template>
-        <ng-template matStepperIcon="license">
+        <!-- <ng-template matStepperIcon="license">
           <mat-icon>assignment</mat-icon>
-        </ng-template>
+        </ng-template> -->
       </mat-horizontal-stepper>
     </div>
 

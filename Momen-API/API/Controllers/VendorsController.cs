@@ -9,6 +9,7 @@ using Core.IRepository;
 using Microsoft.AspNetCore.Http;
 using API.Errors;
 using Utilities.StaticHelpers;
+using Domain.Enums;
 
 namespace API.Controllers
 {
@@ -50,6 +51,7 @@ namespace API.Controllers
             SecurePassword.CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
             vendorUser.PasswordHash = passwordHash;
             vendorUser.PasswordSalt = passwordSalt;
+            vendorUser.Role = VendorUserRoleEnum.GroupAdmin;
 
             vendor.VendorUsers.Add(vendorUser);
             await _vendorRepository.AddAsync(vendor).ConfigureAwait(true);

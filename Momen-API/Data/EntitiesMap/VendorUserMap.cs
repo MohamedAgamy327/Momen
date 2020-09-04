@@ -1,5 +1,4 @@
 ﻿using Domain.Entities;
-using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -16,7 +15,7 @@ namespace Data.EntitiesMap
             builder.Property(t => t.PasswordHash).IsRequired();
             builder.Property(t => t.PasswordSalt).IsRequired();
             builder.Property(t => t.IsRandom).HasDefaultValue(true);
-            builder.Property(t => t.Role).HasDefaultValue(VendorUserRoleEnum.GroupAdmin);
+            builder.Property(t => t.Role).HasDefaultValue();
             builder.HasOne(h => h.Vendor).WithMany(w => w.VendorUsers).HasForeignKey(h => h.VendorId);
         }
     }

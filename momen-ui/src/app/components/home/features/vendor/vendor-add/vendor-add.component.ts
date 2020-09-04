@@ -20,13 +20,13 @@ export class VendorAddComponent implements OnInit, OnDestroy {
 
   vendorForm: FormGroup;
   userForm: FormGroup;
-  attachedForm: FormGroup;
+  // attachedForm: FormGroup;
 
   @ViewChild('stepper') stepper: any;
   @ViewChild('logoInput') logoInput: any;
   @ViewChild('picturesInput') picturesInput: any;
-  @ViewChild('licenseInput') licenseInput: any;
-  @ViewChild('personalIdInput') personalIdInput: any;
+  // @ViewChild('licenseInput') licenseInput: any;
+  // @ViewChild('personalIdInput') personalIdInput: any;
 
   categories: Category[];
 
@@ -71,12 +71,12 @@ export class VendorAddComponent implements OnInit, OnDestroy {
       phone: ['', [Validators.required, Validators.pattern('^[0-9]*$')]]
     });
 
-    this.attachedForm = this.formBuilder.group({
-      license: ['', Validators.required],
-      licenseSource: [''],
-      personalId: ['', Validators.required],
-      personalIdSource: [''],
-    });
+    // this.attachedForm = this.formBuilder.group({
+    //   license: ['', Validators.required],
+    //   licenseSource: [''],
+    //   personalId: ['', Validators.required],
+    //   personalIdSource: [''],
+    // });
   }
 
   ngOnInit(): void {
@@ -130,9 +130,9 @@ export class VendorAddComponent implements OnInit, OnDestroy {
     return this.userForm.controls[control].hasError(error);
   }
 
-  public attachedErrorHandling = (control: string, error: string) => {
-    return this.attachedForm.controls[control].hasError(error);
-  }
+  // public attachedErrorHandling = (control: string, error: string) => {
+  //   return this.attachedForm.controls[control].hasError(error);
+  // }
 
   logoInputChange(event: any) {
     if (this.fileValidationService.checkInvalidImage(event.target.files[0])) {
@@ -162,41 +162,41 @@ export class VendorAddComponent implements OnInit, OnDestroy {
     this.vendorForm.patchValue({ pictures: '' });
   }
 
-  licenseInputChange(event: any) {
-    if (this.fileValidationService.checkInvalidImage(event.target.files[0])) {
-      this.attachedForm.patchValue({ license: '' });
-      this.toastrService.error('Invalid Image', 'Error');
-    } else {
-      this.attachedForm.patchValue({ licenseSource: event.target.files[0] });
-    }
-  }
+  // licenseInputChange(event: any) {
+  //   if (this.fileValidationService.checkInvalidImage(event.target.files[0])) {
+  //     this.attachedForm.patchValue({ license: '' });
+  //     this.toastrService.error('Invalid Image', 'Error');
+  //   } else {
+  //     this.attachedForm.patchValue({ licenseSource: event.target.files[0] });
+  //   }
+  // }
 
-  clearLicenseInput($event: any) {
-    this.licenseInput.clear($event);
-    this.attachedForm.patchValue({ license: '' });
-  }
+  // clearLicenseInput($event: any) {
+  //   this.licenseInput.clear($event);
+  //   this.attachedForm.patchValue({ license: '' });
+  // }
 
-  personalIdInputChange(event: any) {
-    if (this.fileValidationService.checkInvalidImage(event.target.files[0])) {
-      this.attachedForm.patchValue({ personalId: '' });
-      this.toastrService.error('Invalid Image', 'Error');
-    } else {
-      this.attachedForm.patchValue({ personalIdSource: event.target.files[0] });
-    }
-  }
+  // personalIdInputChange(event: any) {
+  //   if (this.fileValidationService.checkInvalidImage(event.target.files[0])) {
+  //     this.attachedForm.patchValue({ personalId: '' });
+  //     this.toastrService.error('Invalid Image', 'Error');
+  //   } else {
+  //     this.attachedForm.patchValue({ personalIdSource: event.target.files[0] });
+  //   }
+  // }
 
-  clearPersonalIdInput($event: any) {
-    this.personalIdInput.clear($event);
-    this.attachedForm.patchValue({ personalId: '' });
-  }
+  // clearPersonalIdInput($event: any) {
+  //   this.personalIdInput.clear($event);
+  //   this.attachedForm.patchValue({ personalId: '' });
+  // }
 
   save() {
     this.vendorForm.patchValue({ vendorUser: this.userForm.value });
     this.vendorService.create(this.vendorForm.value).subscribe(
       (res: any) => {
         this.uploadLogo(res.id);
-        this.uploadPersonalId(res.id);
-        this.uploadLicense(res.id);
+        // this.uploadPersonalId(res.id);
+        // this.uploadLicense(res.id);
         this.uploadPictures(res.id);
         this.stepper.reset();
         this.toastrService.success('Vendor Added Successfully', 'Add');
@@ -223,22 +223,22 @@ export class VendorAddComponent implements OnInit, OnDestroy {
       });
   }
 
-  uploadLicense(id: any) {
-    const formData = new FormData();
-    formData.append('id', id);
-    formData.append('license', this.attachedForm.value.licenseSource, this.attachedForm.value.licenseSource.name);
-    this.vendorService.uploadLicense(Number(id), formData).subscribe(
-      (res: any) => {
-      });
-  }
+  // uploadLicense(id: any) {
+  //   const formData = new FormData();
+  //   formData.append('id', id);
+  //   formData.append('license', this.attachedForm.value.licenseSource, this.attachedForm.value.licenseSource.name);
+  //   this.vendorService.uploadLicense(Number(id), formData).subscribe(
+  //     (res: any) => {
+  //     });
+  // }
 
-  uploadPersonalId(id: any) {
-    const formData = new FormData();
-    formData.append('id', id);
-    formData.append('personalId', this.attachedForm.value.personalIdSource, this.attachedForm.value.personalIdSource.name);
-    this.vendorService.uploadPersonalId(Number(id), formData).subscribe(
-      (res: any) => {
-      });
-  }
+  // uploadPersonalId(id: any) {
+  //   const formData = new FormData();
+  //   formData.append('id', id);
+  //   formData.append('personalId', this.attachedForm.value.personalIdSource, this.attachedForm.value.personalIdSource.name);
+  //   this.vendorService.uploadPersonalId(Number(id), formData).subscribe(
+  //     (res: any) => {
+  //     });
+  // }
 
 }
