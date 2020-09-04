@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { VendorService } from 'src/app/core/services';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-vendors',
@@ -19,9 +20,10 @@ import { ToastrService } from 'ngx-toastr';
 export class VendorsComponent implements OnInit {
 
   filter: string;
+  environment = environment;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  displayedColumns: string[] = ['name', 'branchesCount', 'category', 'action'];
+  displayedColumns: string[] = ['logo', 'corporation', 'category', 'status', 'contractType', 'branchesCount', 'creationDate', 'action'];
   vendors: Vendor[];
   dataSource = new MatTableDataSource<Vendor>();
 

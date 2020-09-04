@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace Data.EntitiesMap
 {
@@ -13,7 +14,10 @@ namespace Data.EntitiesMap
             builder.Property(t => t.BranchesCount).IsRequired();
             builder.Property(t => t.Description).IsRequired();
             builder.Property(t => t.CategoryId).IsRequired();
+            builder.Property(t => t.Status).IsRequired();
+            builder.Property(t => t.CreationDate).HasColumnType("date").HasDefaultValue(DateTime.Now);
             builder.HasOne(h => h.Category).WithMany(w => w.Vendors).HasForeignKey(h => h.CategoryId);
+            builder.HasOne(h => h.Contract).WithMany(w => w.Vendors).HasForeignKey(h => h.ContractId);
         }
     }
 }

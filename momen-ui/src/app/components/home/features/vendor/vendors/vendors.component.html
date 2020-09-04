@@ -28,7 +28,17 @@
     <mat-divider></mat-divider>
     <div class="table-responsive">
       <table class="full-wid" mat-table [dataSource]="dataSource">
-        <ng-container matColumnDef="name">
+
+        <ng-container matColumnDef="logo">
+          <th mat-header-cell *matHeaderCellDef> Logo </th>
+          <td mat-cell *matCellDef="let element">
+            <div class="mrgn-r-sm user-list-image">
+              <img class="img-circle" [src]="environment.serverFile + element.logoPath" height="50" width="50">
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="corporation">
           <th mat-header-cell *matHeaderCellDef> Corporation </th>
           <td mat-cell *matCellDef="let element">
             <div class="make-ellipse clickable">{{element.name}} </div>
@@ -42,6 +52,20 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="make-ellipse clickable">{{element.status | addspace}} </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="contractType">
+          <th mat-header-cell *matHeaderCellDef>Contract Type</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="make-ellipse clickable">{{element.contractType}} </div>
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="branchesCount">
           <th mat-header-cell *matHeaderCellDef>Count Of Branches</th>
           <td mat-cell *matCellDef="let element">
@@ -49,14 +73,16 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="creationDate">
+          <th mat-header-cell *matHeaderCellDef>Creation Date</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="make-ellipse clickable">{{element.creationDate| date: 'dd/MM/yyyy'}} </div>
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="action" class="actions-padding">
           <th mat-header-cell *matHeaderCellDef class="actions-padding">Actions</th>
           <td mat-cell *matCellDef="let element">
-
-            <button mat-icon-button>
-              <mat-icon matTooltip="Show" aria-label="Show" class="mat-icon-grey .table-icon">visibility
-              </mat-icon>
-            </button>
 
             <button mat-icon-button>
               <mat-icon matTooltip="Edit" aria-label="Edit" class="mat-icon-grey .table-icon">
@@ -67,19 +93,18 @@
               <mat-icon matTooltip="Delete" aria-label="Delete" class="mat-icon-grey .table-icon">delete
               </mat-icon>
             </button>
-            <a routerLink="/home/vendors/{{element.id}}/pictures">
+
+            <a routerLink="/home/vendors/{{element.id}}">
               <button mat-icon-button>
-                <mat-icon matTooltip="Pictures" aria-label="Pictures" class="mat-icon-grey .table-icon">photo_album
+                <mat-icon matTooltip="Status" aria-label="Status" class="mat-icon-grey .table-icon">pending_actions
                 </mat-icon>
               </button>
             </a>
 
-            <a routerLink="/home/vendors/{{element.id}}/users">
-              <button mat-icon-button>
-                <mat-icon matTooltip="Users" aria-label="Users" class="mat-icon-grey .table-icon">group
-                </mat-icon>
-              </button>
-            </a>
+            <button mat-icon-button>
+              <mat-icon matTooltip="Corporation" aria-label="Corporation" class="mat-icon-grey .table-icon">apartment
+              </mat-icon>
+            </button>
 
           </td>
         </ng-container>

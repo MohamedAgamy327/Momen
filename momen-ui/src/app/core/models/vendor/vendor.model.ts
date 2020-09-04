@@ -1,5 +1,6 @@
 export interface Vendor {
   id: number;
+  creationDate: Date;
   name: string;
   branchesCount: number;
   description: string;
@@ -7,10 +8,12 @@ export interface Vendor {
   twitter: string;
   instagram: string;
   categoryName: string;
-  logoPath: string;
-  licensePath: string;
-  personalIdPath: string;
+  contractName: string;
   logoName: string;
   licenseName: string;
   personalIdName: string;
+  logoPath: string;
+  licensePath: string;
+  personalIdPath: string;
+  status: string;
 }

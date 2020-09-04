@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Domain.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace Domain.Entities
 {
@@ -8,6 +10,7 @@ namespace Domain.Entities
         {
             VendorUsers = new List<VendorUser>();
         }
+        public DateTime CreationDate { get; set; }
         public string Name { get; set; }
         public int BranchesCount { get; set; }
         public string Description { get; set; }
@@ -16,15 +19,13 @@ namespace Domain.Entities
         public string Instagram { get; set; }
         public string LogoName { get; set; }
         public string LicenseName { get; set; }
-        public string PersonalIdName { get; set; }
+        public string PersonalIdName { get; set; } 
+        public VendorStatusEnum Status { get; set; }
+        public int? ContractId { get; set; }
+        public Contract Contract { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public ICollection<VendorUser> VendorUsers { get; set; }
         public ICollection<VendorPicture> VendorPictures { get; set; }
     }
 }
-
-//public string Address { get; set; }
-//public string Map { get; set; }
-//public string Email { get; set; }
-//public string Phone { get; set; }
