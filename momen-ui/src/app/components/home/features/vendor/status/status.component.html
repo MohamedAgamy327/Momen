@@ -1,1 +1,13 @@
-<p>status works!</p>
+<div class="pad-all-md" fxLayout="row" fxLayoutAlign="space-between">
+  <mat-expansion-panel [expanded]="true" fxFill>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="header-title">
+        Corporation Info
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+
+    <app-corporation-info [vendor]="vendor"></app-corporation-info>
+
+  </mat-expansion-panel>
+</div>
