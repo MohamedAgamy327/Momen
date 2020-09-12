@@ -38,6 +38,10 @@ export class VendorUserService {
     return this.http.get<VendorUser>(`${environment.serverUrl}vendorUsers/${id}`);
   }
 
+  getAdmin(vendorId: number): Observable<VendorUser> {
+    return this.http.get<VendorUser>(`${environment.serverUrl}vendorUsers/admin/vendors/${vendorId}`);
+  }
+
   getAll(vendorId: number): Observable<VendorUser> {
     return this.http.get<VendorUser>(`${environment.serverUrl}vendorUsers/Vendors/${vendorId}`);
   }

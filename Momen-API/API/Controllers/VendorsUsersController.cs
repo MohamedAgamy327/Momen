@@ -19,11 +19,14 @@ namespace API.Controllers
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IVendorUserRepository _vendorUserRepository;
-        public VendorUsersController(IMapper mapper, IUnitOfWork unitOfWork, IVendorUserRepository vendorUserRepository)
+        private readonly IVendorRepository _vendorRepository;
+
+        public VendorUsersController(IMapper mapper, IUnitOfWork unitOfWork, IVendorUserRepository vendorUserRepository, IVendorRepository vendorRepository)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _vendorUserRepository = vendorUserRepository;
+            _vendorRepository = vendorRepository;
         }
 
         [HttpPost]
@@ -168,10 +171,25 @@ namespace API.Controllers
             return Ok(vendorUserDto);
         }
 
+        [HttpGet("admin/vendors/{vendorId:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<VendorUserForGetDTO>> GetAdmin(int vendorId)
+        {
+            if (!await _vendorRepository.IsExist(vendorId).ConfigureAwait(true))
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", vendorId)));
+
+            VendorUser vendorUser = await _vendorUserRepository.GetAdminAsync(vendorId).ConfigureAwait(true);
+            VendorUserForGetDTO vendorUserDto = _mapper.Map<VendorUserForGetDTO>(vendorUser);
+            return Ok(vendorUserDto);
+        }
+
         [HttpGet("vendors/{vendorId:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IReadOnlyList<VendorUserForGetDTO>>> GetByVendor(int vendorId)
         {
+            if (!await _vendorRepository.IsExist(vendorId).ConfigureAwait(true))
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", vendorId)));
+
             List<VendorUserForGetDTO> vendorUsers = _mapper.Map<List<VendorUserForGetDTO>>(await _vendorUserRepository.GetByVendorAsync(vendorId).ConfigureAwait(true));
             return Ok(vendorUsers);
         }

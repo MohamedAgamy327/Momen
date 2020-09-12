@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { VendorRoutingModule } from './vendor-routing.module';
-import { VendorsComponent, VendorAddComponent, StatusComponent, CorporationInfoComponent } from '.';
+import { VendorsComponent, VendorAddComponent, StatusComponent, CorporationInfoComponent, AdminInfoComponent } from '.';
 
 @NgModule({
   declarations: [
@@ -12,6 +12,7 @@ import { VendorsComponent, VendorAddComponent, StatusComponent, CorporationInfoC
     VendorAddComponent,
     StatusComponent,
     CorporationInfoComponent,
+    AdminInfoComponent,
   ],
   entryComponents: [
 

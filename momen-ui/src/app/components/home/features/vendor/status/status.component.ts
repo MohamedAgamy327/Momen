@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Vendor } from 'src/app/core/models';
-import { VendorService } from 'src/app/core/services';
+import { Vendor, VendorUser } from 'src/app/core/models';
+import { VendorService, VendorUserService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-status',
@@ -11,20 +11,30 @@ import { VendorService } from 'src/app/core/services';
 export class StatusComponent implements OnInit {
 
   vendor: Vendor;
+  user: VendorUser;
 
   constructor(
     private vendorService: VendorService,
+    private vendorUserService: VendorUserService,
     public route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.getVendor(Number(this.route.snapshot.params.vendorId));
+    this.getAdmin(Number(this.route.snapshot.params.vendorId));
   }
 
   getVendor(vendorId: number) {
     this.vendorService.get(vendorId).subscribe(
       (res: any) => {
         this.vendor = res;
+      });
+  }
+
+  getAdmin(vendorId: number) {
+    this.vendorUserService.getAdmin(vendorId).subscribe(
+      (res: any) => {
+        this.user = res;
       });
   }
 

@@ -1,55 +1,53 @@
-<div class="mat-pad-none">
+<div fxLayout="row" fxLayoutAlign="stretch">
 
-  <div fxLayout="row" fxLayoutAlign="stretch">
+  <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="65" fxFlex.lg="100" fxFlex.xl="70">
+    <div fxLayout="row" fxLayoutAlign="stretch" class="profile-content">
 
-    <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="65" fxFlex.lg="100" fxFlex.xl="70">
-      <div fxLayout="row" fxLayoutAlign="stretch" class="profile-content">
+      <div fxLayout="column" fxFlex="13">
+        <div class="mrgn-r-xs">
+          <img alt="profile image" [src]="environment.serverFile + vendor?.logoPath" width="130" height="130"
+            class="mrgn-b-xs img-circle">
+        </div>
+      </div>
 
-        <div fxLayout="column" fxFlex="13">
-          <div class="mrgn-r-xs">
-            <img alt="profile image" [src]="environment.serverFile + vendor?.logoPath" width="130" height="130"
-              class="mrgn-b-xs img-circle">
+      <div fxLayout="column" fxFlex="80">
+
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+          <div fxFill>
+            <div fxLayout="row" fxLayoutAlign="space-around stretch" class="mrgn-b-md">
+              <p fxFlex="50" class="mrgn-b-md">Name: {{vendor?.name}}</p>
+              <p fxFlex="50" class="mrgn-b-md">Category: {{vendor?.categoryName}}</p>
+            </div>
           </div>
+
         </div>
 
-        <div fxLayout="column" fxFlex="80">
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
 
-          <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-
-            <div fxFill>
-              <div fxLayout="row" fxLayoutAlign="space-around stretch" class="mrgn-b-md">
-                <p fxFlex="50" class="mrgn-b-md">Name: {{vendor?.name}}</p>
-                <p fxFlex="50" class="mrgn-b-md">Category: {{vendor?.categoryName}}</p>
-              </div>
+          <div fxFill>
+            <div fxLayout="row" fxLayoutAlign="space-around stretch" class="mrgn-b-md">
+              <p fxFlex="50" class="mrgn-b-md">Count Of Branches: {{vendor?.branchesCount}}</p>
+              <p fxFlex="50" class="mrgn-b-md">Description: {{vendor?.description}}</p>
             </div>
-
           </div>
 
-          <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+        </div>
 
-            <div fxFill>
-              <div fxLayout="row" fxLayoutAlign="space-around stretch" class="mrgn-b-md">
-                <p fxFlex="50" class="mrgn-b-md">Count Of Branches: {{vendor?.branchesCount}}</p>
-                <p fxFlex="50" class="mrgn-b-md">Description: {{vendor?.description}}</p>
-              </div>
+        <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+
+          <div fxFill>
+            <div fxLayout="row" fxLayoutAlign="space-around stretch" class="mrgn-b-md">
+              <p fxFlex="33" class="mrgn-b-md">Facebook: {{vendor?.facebook}}</p>
+              <p fxFlex="33" class="mrgn-b-md">Twitter: {{vendor?.twitter}}</p>
+              <p fxFlex="33" class="mrgn-b-md">Instagram: {{vendor?.instagram}}</p>
             </div>
-
-          </div>
-
-          <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-
-            <div fxFill>
-              <div fxLayout="row" fxLayoutAlign="space-around stretch" class="mrgn-b-md">
-                <p fxFlex="33" class="mrgn-b-md">Facebook: {{vendor?.facebook}}</p>
-                <p fxFlex="33" class="mrgn-b-md">Twitter: {{vendor?.twitter}}</p>
-                <p fxFlex="33" class="mrgn-b-md">Instagram: {{vendor?.instagram}}</p>
-              </div>
-            </div>
-
           </div>
 
         </div>
 
       </div>
+
     </div>
   </div>
+</div>

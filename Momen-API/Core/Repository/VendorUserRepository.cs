@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Utilities.StaticHelpers;
+using Domain.Enums;
 
 namespace Core.Repository
 {
@@ -73,6 +74,10 @@ namespace Core.Repository
         public async Task<bool> IsExistByPhone(int id, string phone)
         {
             return await _context.VendorsUsers.AnyAsync(s => s.Id != id && s.Phone == phone).ConfigureAwait(true);
+        }
+        public async Task<VendorUser> GetAdminAsync(int vendorId)
+        {
+            return await _context.VendorsUsers.AsNoTracking().SingleOrDefaultAsync(s => s.VendorId == vendorId && s.Role == VendorUserRoleEnum.GroupAdmin);
         }
     }
 }
