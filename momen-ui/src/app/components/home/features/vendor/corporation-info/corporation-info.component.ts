@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Vendor } from 'src/app/core/models';
 import { environment } from 'src/environments/environment';
 
@@ -7,14 +7,9 @@ import { environment } from 'src/environments/environment';
   templateUrl: './corporation-info.component.html',
   styleUrls: ['./corporation-info.component.css']
 })
-export class CorporationInfoComponent implements OnInit {
+export class CorporationInfoComponent {
 
   @Input() public vendor: Vendor;
   environment = environment;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

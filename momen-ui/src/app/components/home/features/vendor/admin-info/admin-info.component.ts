@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { VendorUser } from 'src/app/core/models';
 
 @Component({
@@ -6,13 +6,8 @@ import { VendorUser } from 'src/app/core/models';
   templateUrl: './admin-info.component.html',
   styleUrls: ['./admin-info.component.css']
 })
-export class AdminInfoComponent implements OnInit {
+export class AdminInfoComponent {
 
   @Input() public user: VendorUser;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

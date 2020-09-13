@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Vendor, VendorUser } from 'src/app/core/models';
-import { VendorService, VendorUserService } from 'src/app/core/services';
+import { Vendor, VendorPicture, VendorUser } from 'src/app/core/models';
+import { VendorPictureService, VendorService, VendorUserService } from 'src/app/core/services';
 
 @Component({
   selector: 'app-status',
@@ -12,16 +12,19 @@ export class StatusComponent implements OnInit {
 
   vendor: Vendor;
   user: VendorUser;
+  vendorPictures: VendorPicture[];
 
   constructor(
     private vendorService: VendorService,
     private vendorUserService: VendorUserService,
+    private vendorPictureService: VendorPictureService,
     public route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     this.getVendor(Number(this.route.snapshot.params.vendorId));
     this.getAdmin(Number(this.route.snapshot.params.vendorId));
+    this.getVendorPictures(Number(this.route.snapshot.params.vendorId));
   }
 
   getVendor(vendorId: number) {
@@ -35,6 +38,13 @@ export class StatusComponent implements OnInit {
     this.vendorUserService.getAdmin(vendorId).subscribe(
       (res: any) => {
         this.user = res;
+      });
+  }
+
+  getVendorPictures(id: number) {
+    this.vendorPictureService.getAll(id).subscribe(
+      (res: any) => {
+        this.vendorPictures = res;
       });
   }
 

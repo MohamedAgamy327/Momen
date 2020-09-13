@@ -26,3 +26,18 @@
 
   </mat-expansion-panel>
 </div>
+
+<div class="pad-all-md" fxLayout="row" fxLayoutAlign="space-between">
+  <mat-expansion-panel fxFill>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="header-title">
+        Pictures
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+
+    <app-vendor-pictures-show *ngIf="vendorPictures && vendorPictures.length > 0" [vendorPictures]="vendorPictures">
+    </app-vendor-pictures-show>
+
+  </mat-expansion-panel>
+</div>
