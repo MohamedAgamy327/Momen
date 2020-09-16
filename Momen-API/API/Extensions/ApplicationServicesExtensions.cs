@@ -18,6 +18,7 @@ namespace API.Extensions
             services.AddScoped<IContractRepository, ContractRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IVendorUserRepository, VendorUserRepository>();
+            services.AddTransient<IVendorRejectRepository, VendorRejectRepository>();
             services.AddTransient<IVendorPictureRepository, VendorPictureRepository>();
             return services;
         }

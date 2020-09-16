@@ -12,6 +12,7 @@ export * from './api/customer.service';
 export * from './api/vendor.service';
 export * from './api/vendor-user.service';
 export * from './api/vendor-picture.service';
+export * from './api/vendor-reject.service';
 
 
 

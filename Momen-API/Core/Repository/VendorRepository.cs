@@ -27,11 +27,11 @@ namespace Core.Repository
         }
         public async Task<Vendor> GetAsync(int id)
         {
-            return await _context.Vendors.Include(k => k.Category).AsNoTracking().SingleOrDefaultAsync(s => s.Id == id);
+            return await _context.Vendors.Include(k => k.Category).Include(d=>d.Contract).AsNoTracking().SingleOrDefaultAsync(s => s.Id == id);
         }
         public async Task<IEnumerable<Vendor>> GetAsync()
         {
-            return await _context.Vendors.OrderByDescending(o => o.Id).Include(k => k.Category).ToListAsync();
+            return await _context.Vendors.OrderByDescending(o => o.Id).Include(k => k.Category).Include(d => d.Contract).ToListAsync();
         }
         public void Remove(Vendor vendor)
         {

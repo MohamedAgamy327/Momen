@@ -15,6 +15,7 @@ export class StatusComponent implements OnInit {
   user: VendorUser;
   vendorPictures: VendorPicture[];
 
+
   constructor(
     private vendorService: VendorService,
     private vendorUserService: VendorUserService,
@@ -48,5 +49,6 @@ export class StatusComponent implements OnInit {
         this.vendorPictures = res;
       });
   }
+
 
 }

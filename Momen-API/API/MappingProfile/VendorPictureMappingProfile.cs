@@ -4,9 +4,9 @@ using Domain.Entities;
 
 namespace API.MappingProfile
 {
-    public class VendorPictureMapProfile : Profile
+    public class VendorPictureMappingProfile : Profile
     {
-        public VendorPictureMapProfile()
+        public VendorPictureMappingProfile()
         {
             CreateMap<VendorPicture, VendorPictureForGetDTO>()
                      .ForMember(dest => dest.PicturePath, opt => opt.MapFrom(src => !string.IsNullOrEmpty(src.PictureName) ? $"Vendors/{src.VendorId}/Pictures/{src.PictureName}" : null));

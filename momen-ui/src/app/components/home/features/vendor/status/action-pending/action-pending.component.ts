@@ -1,11 +1,13 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSelect } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Contract } from 'src/app/core/models';
-import { ContractService, VendorService } from 'src/app/core/services';
+import { Contract, VendorReject } from 'src/app/core/models';
+import { ContractService, VendorRejectService, VendorService } from 'src/app/core/services';
+import { RejectListDialogComponent } from '../reject-list-dialog/reject-list-dialog.component';
 
 @Component({
   selector: 'app-action-pending',
@@ -25,16 +27,31 @@ export class ActionPendingComponent implements OnInit, OnDestroy {
   public filteredContractsMulti: ReplaySubject<Contract[]> = new ReplaySubject<Contract[]>();
   @ViewChild('singleContractSelect', { static: true }) singleContractSelect: MatSelect;
 
+  public reasonCtrl: FormControl = new FormControl('', Validators.required);
+
   protected onDestroy = new Subject<void>();
+
+  vendorRejects: VendorReject[];
 
   constructor(
     private contractService: ContractService,
     private vendorService: VendorService,
+    private vendorRejectService: VendorRejectService,
+    private dialog: MatDialog,
     private router: Router
   ) { }
 
   ngOnInit(): void {
     this.getContracts();
+    this.getVendorRejects(Number(this.vendorId));
+  }
+
+  getVendorRejects(id: number) {
+    this.vendorRejectService.getAll(id).subscribe(
+      (res: any) => {
+        this.vendorRejects = res;
+        console.log(this.vendorRejects)
+      });
   }
 
   getContracts() {
@@ -81,6 +98,20 @@ export class ActionPendingComponent implements OnInit, OnDestroy {
       (res: any) => {
         this.router.navigate([`/home/vendors`]);
       });
+  }
+
+  reject() {
+    const reject = { vendorId: Number(this.vendorId), reason: this.reasonCtrl.value };
+    this.vendorRejectService.create(reject).subscribe(
+      (res: any) => {
+        this.router.navigate([`/home/vendors`]);
+      });
+  }
+
+  showRejects() {
+    this.dialog.open(RejectListDialogComponent, {
+      data: this.vendorRejects
+    });
   }
 
 }

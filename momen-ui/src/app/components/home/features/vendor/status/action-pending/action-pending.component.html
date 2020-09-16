@@ -8,8 +8,15 @@
 
         <mat-radio-group [(ngModel)]="action" aria-label="Select an action">
           <mat-radio-button value="accept" class="mrgn-r-xs mrgn-x-xs">Accept</mat-radio-button>
-          <mat-radio-button value="Reject" class="mrgn-r-xs mrgn-x-xs">Reject</mat-radio-button>
+          <mat-radio-button value="reject" class="mrgn-r-xs mrgn-x-xs">Reject</mat-radio-button>
         </mat-radio-group>
+
+
+
+        <button mat-icon-button (click)="showRejects()">
+          <mat-icon matTooltip="Show History" aria-label="Show" class="mat-icon-grey .table-icon">history
+          </mat-icon>
+        </button>
 
       </div>
 
@@ -45,4 +52,27 @@
 <div *ngIf="action=='accept'" fxLayout="row" fxLayoutAlign="center center">
   <button mat-button mat-raised-button type="submit" color="primary" (click)="accept()"
     [disabled]="!contractCtrl.valid">Save</button>
+</div>
+
+
+<div *ngIf="action=='reject'" fxLayout="row" fxLayoutAlign="center center">
+
+  <div fxLayout="row" fxFlex="70" fxLayoutAlign="center center">
+
+    <mat-form-field class="full-wid mrgn-b-xs" appearance="outline">
+      <mat-label>Leave a reason</mat-label>
+      <textarea [formControl]="reasonCtrl" matInput placeholder="Reason"></textarea>
+      <mat-error *ngIf="!reasonCtrl.valid">
+        This field is required
+      </mat-error>
+
+    </mat-form-field>
+
+  </div>
+
+</div>
+
+<div *ngIf="action=='reject'" fxLayout="row" fxLayoutAlign="center center">
+  <button mat-button mat-raised-button type="submit" color="primary" (click)="reject()"
+    [disabled]="!reasonCtrl.valid">Save</button>
 </div>

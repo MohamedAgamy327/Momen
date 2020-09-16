@@ -4,9 +4,9 @@ using Domain.Entities;
 
 namespace API.MappingProfile
 {
-    public class CustomerMapProfile : Profile
+    public class CustomerMappingProfile : Profile
     {
-        public CustomerMapProfile()
+        public CustomerMappingProfile()
         {
             CreateMap<CustomerForAddDTO, Customer>();
             CreateMap<CustomerForEditDTO, Customer>();

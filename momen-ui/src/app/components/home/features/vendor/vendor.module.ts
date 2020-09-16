@@ -8,7 +8,7 @@ import {
   VendorsComponent, VendorAddComponent,
   StatusComponent, CorporationInfoComponent,
   AdminInfoComponent, VendorPicturesShowComponent,
-  ActionPendingComponent
+  ActionPendingComponent, RejectListDialogComponent
 } from '.';
 
 @NgModule({
@@ -20,9 +20,10 @@ import {
     AdminInfoComponent,
     VendorPicturesShowComponent,
     ActionPendingComponent,
+    RejectListDialogComponent,
   ],
   entryComponents: [
-
+    RejectListDialogComponent
   ],
   imports: [
     CommonModule,

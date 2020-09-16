@@ -24,6 +24,7 @@ namespace Data.Context
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<VendorUser> VendorsUsers { get; set; }
+        public DbSet<VendorReject> VendorsRejects { get; set; }
         public DbSet<VendorPicture> VendorsPictures { get; set; }
 
     }

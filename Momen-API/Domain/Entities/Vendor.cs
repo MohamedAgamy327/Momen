@@ -26,6 +26,7 @@ namespace Domain.Entities
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public ICollection<VendorUser> VendorUsers { get; set; }
+        public ICollection<VendorReject> VendorRejects { get; set; }
         public ICollection<VendorPicture> VendorPictures { get; set; }
     }
 }
