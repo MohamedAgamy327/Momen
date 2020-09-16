@@ -7,7 +7,8 @@ import { VendorRoutingModule } from './vendor-routing.module';
 import {
   VendorsComponent, VendorAddComponent,
   StatusComponent, CorporationInfoComponent,
-  AdminInfoComponent, VendorPicturesShowComponent
+  AdminInfoComponent, VendorPicturesShowComponent,
+  ActionPendingComponent
 } from '.';
 
 @NgModule({
@@ -18,6 +19,7 @@ import {
     CorporationInfoComponent,
     AdminInfoComponent,
     VendorPicturesShowComponent,
+    ActionPendingComponent,
   ],
   entryComponents: [
 

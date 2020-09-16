@@ -156,6 +156,28 @@ namespace API.Controllers
             return Ok(vendorDto);
         }
 
+        [HttpPatch("{id:int}/AcceptPending")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> AcceptPending(int id, VendorForAcceptPendingDTO model)
+        {
+            if (id != model.Id)
+                return BadRequest(new ApiResponse(400, StringConcatenates.NotEqualIds(id, model.Id)));
+
+            if (!await _vendorRepository.IsExist(id).ConfigureAwait(true))
+                return NotFound(new ApiResponse(404, StringConcatenates.NotExist("Vendor", id)));
+
+            Vendor vendor = await _vendorRepository.GetAsync(model.Id).ConfigureAwait(true);
+
+            vendor.ContractId = model.ContractId;
+            vendor.Status = VendorStatusEnum.WaitingForAccept;
+
+            _vendorRepository.Edit(vendor);
+            await _unitOfWork.CompleteAsync().ConfigureAwait(true);
+
+            VendorForGetDTO vendorDto = _mapper.Map<VendorForGetDTO>(vendor);
+            return Ok(vendorDto);
+        }
+
         [HttpDelete("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<VendorForGetDTO>> Delete(int id)

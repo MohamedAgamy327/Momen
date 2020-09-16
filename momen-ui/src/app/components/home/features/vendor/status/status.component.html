@@ -41,3 +41,17 @@
 
   </mat-expansion-panel>
 </div>
+
+<div class="pad-all-md" fxLayout="row" fxLayoutAlign="space-between">
+  <mat-expansion-panel fxFill>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="header-title">
+        Actions
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+
+    <app-action-pending [vendorId]="this.route.snapshot.params.vendorId"></app-action-pending>
+
+  </mat-expansion-panel>
+</div>

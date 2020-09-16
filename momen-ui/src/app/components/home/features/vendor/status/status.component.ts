@@ -8,6 +8,7 @@ import { VendorPictureService, VendorService, VendorUserService } from 'src/app/
   templateUrl: './status.component.html',
   styleUrls: ['./status.component.css']
 })
+
 export class StatusComponent implements OnInit {
 
   vendor: Vendor;

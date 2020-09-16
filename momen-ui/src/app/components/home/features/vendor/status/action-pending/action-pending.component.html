@@ -1,0 +1,48 @@
+<div fxLayout="row" fxLayoutAlign="stretch" class="mrgn-b-sm mrgn-y-sm">
+
+  <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="65" fxFlex.lg="100" fxFlex.xl="70">
+
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
+
+      <div fxLayoutAlign="center center">
+
+        <mat-radio-group [(ngModel)]="action" aria-label="Select an action">
+          <mat-radio-button value="accept" class="mrgn-r-xs mrgn-x-xs">Accept</mat-radio-button>
+          <mat-radio-button value="Reject" class="mrgn-r-xs mrgn-x-xs">Reject</mat-radio-button>
+        </mat-radio-group>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="action=='accept'" fxLayout="row" fxLayoutAlign="center center">
+
+  <div fxLayout="row" fxFlex="70" fxLayoutAlign="none center">
+    <p fxFlex="20" fxLayoutAlign="end" class="mrgn-r-xs mrgn-x-xs">Select Contract:</p>
+    <mat-form-field class="full-wid mrgn-b-xs" appearance="outline">
+      <mat-label>Contract</mat-label>
+      <mat-select [formControl]="contractCtrl" placeholder="Contracts" #singleSelect>
+        <mat-option>
+          <ngx-mat-select-search [formControl]="contractMultiFilterCtrl" placeholderLabel="Find contract..."
+            noEntriesFoundLabel="'No matching Contract found'">
+          </ngx-mat-select-search>
+        </mat-option>
+        <mat-option *ngFor="let contract of filteredContractsMulti | async" [value]="contract.id">
+          {{contract.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="contractCtrl.hasError('required')">
+        This field is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+</div>
+
+<div *ngIf="action=='accept'" fxLayout="row" fxLayoutAlign="center center">
+  <button mat-button mat-raised-button type="submit" color="primary" (click)="accept()"
+    [disabled]="!contractCtrl.valid">Save</button>
+</div>

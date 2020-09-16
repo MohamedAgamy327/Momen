@@ -34,6 +34,10 @@ export class VendorService {
     return this.http.patch(`${environment.serverUrl}vendors/${id}/personalId`, model);
   }
 
+  acceptPending(id: number, model: any): Observable<any> {
+    return this.http.patch(`${environment.serverUrl}vendors/${id}/AcceptPending`, model);
+  }
+
   delete(id: number): Observable<any> {
     return this.http.delete<Vendor>(`${environment.serverUrl}vendors/${id}`);
   }
